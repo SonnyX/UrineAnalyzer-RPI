@@ -1,5 +1,11 @@
 <template name="MenuItem">
 	<a class="{{item}} item" href="{{href}}">
-  		<i class="{{icon}} icon"></i> {{label}}
+		{{#if icon}}
+  			<i class="{{icon}} icon"></i> 
+		{{/if}}
+		{{label}}
 	</a>
+	{{#each items}}
+		{{> MenuItem}}
+	{{/each}}
 </template>
