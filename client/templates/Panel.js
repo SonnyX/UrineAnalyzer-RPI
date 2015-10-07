@@ -18,8 +18,5 @@ Template.Panel.helpers({
       return OutputsButtons;
     }
     return SensorButtons;
-  }/*,
-  Button: function(){
-    return Template.instance().data.innerContent();
-  }*/
+  }
 });

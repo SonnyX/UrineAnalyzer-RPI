@@ -37,6 +37,7 @@ kadira:flow-router@2.7.0
 launch-screen@1.0.4
 livedata@1.0.15
 logging@1.0.8
+maazalik:highcharts@0.4.0
 meteor@1.1.9
 meteor-base@1.0.1
 meteorhacks:async@1.0.0
@@ -59,6 +60,7 @@ reload@1.1.4
 retry@1.0.4
 routepolicy@1.0.6
 semantic:ui@2.1.4_2
+semantic:ui-css@2.1.2
 semantic:ui-data@2.1.4_2
 session@1.1.1
 spacebars@1.0.7

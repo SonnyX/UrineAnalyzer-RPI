@@ -23,3 +23,5 @@ kadira:flow-router
 meteorhacks:npm
 npm-container
 check
+semantic:ui-css
+maazalik:highcharts
