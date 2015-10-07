@@ -1,6 +1,6 @@
 
 FlowRouter.route('/', {
   action: function() {
-    BlazeLayout.render('Main', { content: 'Home' });
+    BlazeLayout.render('Main', { content: 'Panel',innerContent:'SensorButton' });
   }
 });

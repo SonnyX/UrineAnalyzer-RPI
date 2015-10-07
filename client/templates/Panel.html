@@ -1,0 +1,11 @@
+<template name="Panel">
+  <div class="ui basic inverted segment">
+    <div class="ui grid">
+      {{#each Buttons}}
+      <div class="eight wide column">
+        {{>UI.dynamic template=Button}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</template>
