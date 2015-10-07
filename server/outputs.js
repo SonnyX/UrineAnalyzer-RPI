@@ -7,7 +7,7 @@ Outputs = {
       Outputs.update(selector, modifier, { upsert: true });
     }
     else {
-    	console.log("update: Invalid Arguments");
+      console.log("update: Invalid Arguments: " + state.pin + " " + state.value);
     }
   }
 

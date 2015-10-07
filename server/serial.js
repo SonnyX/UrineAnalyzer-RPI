@@ -12,7 +12,18 @@ Serial = {
   "portHandle": undefined,
   
   "callbacks": {
-    updateOutput: Outputs.update,
+    updateOutput: function(args) {
+      var pins = args.pins;
+      var values = args.values;
+
+      if (pins.length == values.length) {
+        for (i = 0; i < pins.length; i++) {
+          var state = { pin: pins[i], value: values[i] }
+          console.log(state)
+          Outputs.update(state)
+        }
+      }
+    },
     sensorReading: function(args) { 
     //  console.log("Sensor: " + args.value) 
     }

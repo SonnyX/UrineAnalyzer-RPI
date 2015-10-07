@@ -6,8 +6,18 @@ Meteor.startup(function () {
 });
 
 Meteor.methods({
-  "changeOutput": function (pin, value) {
-    var array = [0, pin, value];
-    Serial.write(JSON.stringify(array));
+  "changeOutput": function (pins, values) {
+
+  	if (pins.length == values.length) {
+    	var cmd = [0]
+
+  		while (pins.length) {
+  			cmd.push(pins.pop())
+  			cmd.push(values.pop())
+  		}
+  		
+    	Serial.write(JSON.stringify(cmd))
+  	}
+
   }
 });
