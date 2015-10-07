@@ -1,8 +1,8 @@
 Outputs = new Mongo.Collection("outputs");
 
-if (Meteor.isServer) {		
+if (Meteor.isServer) {
 	Meteor.publish("outputs", function () {
-	  return Outputs.find({});  
+	  return Outputs.find({});
 	});
 }
 
