@@ -5,18 +5,8 @@ var SensorButtons = [
   {label:'Cl',value:'160',ref:'/data/cl'}
 ]
 
-var OutputsButtons = [
-  {label:'Motor 1', value:0},
-  {label:'Valve 1', value:1},
-  {label:'Valve 2', value:1},
-  {label:'Valve 3', value:0}
-]
-
-Template.Panel.helpers({
+Template.Grid.helpers({
   Buttons: function(){
-    if (this.innerContent() == "Outputs") {
-      return OutputsButtons;
-    }
     return SensorButtons;
   }
 });

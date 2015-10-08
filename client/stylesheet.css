@@ -1,0 +1,16 @@
+
+.hidden {
+  display: none !important;
+}
+ .segment {
+   height: 100% !important;
+   margin-top: 40px !important;
+ }
+ .pusher {
+   height: 100% !important;
+ }
+
+.button {
+  padding-left: 0em !important;
+  padding-right: 0em !important;
+}

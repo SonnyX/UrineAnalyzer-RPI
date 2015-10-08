@@ -1,7 +1,7 @@
 <template name="MenuItem">
-	<a class="{{item}} item" href="{{href}}">
+	<a class="{{item}} {{hidden}} item" href="{{href}}">
 		{{#if icon}}
-  			<i class="{{icon}} icon"></i> 
+  			<i class="{{icon}} icon"></i>
 		{{/if}}
 		{{label}}
 	</a>

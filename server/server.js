@@ -1,8 +1,8 @@
 // Check serial connection every 5s
 Meteor.startup(function () {
-  Meteor.setInterval(function () {
+  /*Meteor.setInterval(function () {
     Serial.watchdog();
-  }, 10000);
+  }, 10000);*/
 });
 
 Meteor.methods({
@@ -15,7 +15,7 @@ Meteor.methods({
   			cmd.push(pins.pop())
   			cmd.push(values.pop())
   		}
-  		
+
     	Serial.write(JSON.stringify(cmd))
   	}
 

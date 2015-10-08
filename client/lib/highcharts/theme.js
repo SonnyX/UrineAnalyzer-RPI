@@ -14,13 +14,14 @@ Highcharts.darkUnicaTheme = {
    colors: ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
       "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
    chart: {
-      backgroundColor: {
+      backgroundColor: '#1B1C1D'
+      /*backgroundColor: {
          linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
          stops: [
             [0, '#2a2a2b'],
             [1, '#3e3e40']
          ]
-      },
+      }*/,
       style: {
          fontFamily: "'Unica One', sans-serif"
       },
@@ -296,3 +297,5 @@ Highcharts.defaultTheme = {
       }
    }
 };
+
+Highcharts.setOptions(Highcharts.darkUnicaTheme);

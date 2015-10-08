@@ -1,6 +1,6 @@
 
 Template.Data.onRendered(function () {
-  console.log(this.data.innerContent());
+  console.log(this.data.id());
   chart = Charts.spline({averages:averages, ranges:ranges})
   $("#chart").highcharts(chart);
   });

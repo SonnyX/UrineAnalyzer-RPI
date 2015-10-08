@@ -16,12 +16,12 @@ standard-minifiers      # JS/CSS minifiers run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
-semantic:ui
-flemay:less-autoprefixer
 kadira:blaze-layout
 kadira:flow-router
 meteorhacks:npm
 npm-container
 check
-semantic:ui-css
 maazalik:highcharts
+semantic:ui
+flemay:less-autoprefixer
+semantic:ui-css

@@ -5,12 +5,12 @@ Serial = {
   "options": {
     baudrate: 115200,
     parser: SerialPort.parsers.readline("\n")
-  }, 
-  
+  },
+
   "portId": undefined,
 
   "portHandle": undefined,
-  
+
   "callbacks": {
     updateOutput: function(args) {
       var pins = args.pins;
@@ -20,12 +20,12 @@ Serial = {
         for (i = 0; i < pins.length; i++) {
           var state = { pin: pins[i], value: values[i] }
           console.log(state)
-          Outputs.update(state)
+          OutputsController.update(state)
         }
       }
     },
-    sensorReading: function(args) { 
-    //  console.log("Sensor: " + args.value) 
+    sensorReading: function(args) {
+    //  console.log("Sensor: " + args.value)
     }
   },
 
@@ -64,7 +64,7 @@ Serial = {
   "watchdog": function () {
     if (typeof Serial.portHandle == "undefined") {
       console.log("=> Serial: Attempting to connect!")
-      Serial.connect()    
+      Serial.connect()
     }
     else {
       SerialPort.list(Meteor.bindEnvironment(function (error, ports) {
@@ -83,7 +83,7 @@ Serial = {
   "write": function(msg) {
     if (Serial.portHandle) {
       console.log("Serial << " + msg)
-      
+
       Serial.portHandle.write(msg, function (error, results) {
         if (error) console.log("Write Error: " + results)
       })
