@@ -1,31 +1,37 @@
 <template name="Form">
   {{#each Groups}}
-    <div class="ui form">
-      <div class="grouped fields">
-        {{> Template.dynamic template=name }}
+  <div class="ui form">
+    <div class="grouped fields">
+      <div class="ui grid center aligned">
+        {{> Template.dynamic template=template }}
       </div>
     </div>
+  </div>
   {{/each}}
 </template>
 
 <template name="Radiobox">
   {{#each items}}
+  <div class="eight wide column">
     <div class="field">
       <div class="Radiobox ui toggle checkbox">
         <input name="{{pins}}" type="radio">
-        <label class="Radiobox"><div class='ui inverted tiny header'>{{label}}</div></label>
+        <label class="Radiobox"><div class='ui inverted header'>{{label}}</div></label>
       </div>
     </div>
+  </div>
   {{/each}}
 </template>
 
 <template name="Checkbox">
   {{#each items}}
+  <div class="eight wide column">
     <div class="field">
       <div class="Checkbox ui toggle checkbox">
         <input name="{{pins}}" type="checkbox">
-        <label><div class='ui inverted tiny header'>{{label}}</div></label>
+        <label><div class='ui inverted header'>{{label}}</div></label>
       </div>
     </div>
+  </div>
   {{/each}}
 </template>
