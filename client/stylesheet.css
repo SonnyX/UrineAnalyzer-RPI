@@ -1,10 +1,13 @@
-
 .hidden {
   display: none !important;
 }
+
+#gambiarra {
+  height:57.15px;
+}
  .segment {
    height: 100% !important;
-   margin-top: 57.15px !important;
+   margin: 0em 0em 0em 0em !important;
  }
  .pusher {
    height: 100% !important;

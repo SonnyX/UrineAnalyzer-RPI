@@ -1,9 +1,17 @@
 
 Template.Data.onRendered(function () {
-  console.log(this.data.id());
-  chart = Charts.spline({averages:averages, ranges:ranges})
-  $("#chart").highcharts(chart);
+  chart = Chart.build(); //Create Chart
+  this.autorun(function(){
+    let properties = this.templateInstance().data;
+    if (properties.hasOwnProperty('id')) {
+      let data = SensorCollections[properties.id()]// Take the right collection "pH,Na,K or Cl"
+      if (data) {
+        data = data.find({}).fetch();
+        Chart.addData(chart,properties.id(),data) // add Values and titles in the chart
+      }
+    }
   });
+});
 
 
   var ranges = [
