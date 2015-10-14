@@ -3,9 +3,9 @@ var noValue = 'No Value';
 function SensorButtons({ph={value:noValue},na={value:noValue},cl={value:noValue},k={value:noValue}}){
   return([
     {label:'pH',value:ph.value,ref:'/data/ph'},
-    {label:'Na',value:na.value,ref:'/data/na'},
-    {label:'K',value:k.value,ref:'/data/k'},
-    {label:'Cl',value:cl.value,ref:'/data/cl'}
+    {label:'Na',value:na.value,ref:'/data/na',measure:'mmol/L'},
+    {label:'K',value:k.value,ref:'/data/k',measure:'mmol/L'},
+    {label:'Cl',value:cl.value,ref:'/data/cl',measure:'mmol/L'}
   ])
 }
 
@@ -16,7 +16,7 @@ Template.Grid.helpers({
     for (var property in SensorCollections) {
       if (SensorCollections.hasOwnProperty(property)) {
         /*add in the empty object the last element of each collection*/
-        data[property] = SensorCollections[property].findOne({})
+        data[property] = SensorCollections[property].findOne({},{sort:{date:-1}})
       }
     };
     return SensorButtons(data);

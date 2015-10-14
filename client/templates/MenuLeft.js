@@ -26,6 +26,12 @@ items.forEach(function(item){
   MenuItems.insert(item);
 })
 
+Template.MenuLeft.onCreated(function () {
+  reactive = new ReactiveVar(items);
+  console.log(reactive);
+});
+
+
 Template.MenuLeft.helpers({
   items: function() {
     return MenuItems.find({});

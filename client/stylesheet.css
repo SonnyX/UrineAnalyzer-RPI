@@ -3,17 +3,41 @@
 }
 
 #gambiarra {
-  height:57.15px;
+  height:3.572em;
 }
  .segment {
-   height: 100% !important;
-   margin: 0em 0em 0em 0em !important;
+   /*height: 100% !important;*/
+   margin-top: 0em !important
  }
  .pusher {
-   height: 100% !important;
+   /*height: 100% !important;*/
+   background-color: #1B1C1D !important;
  }
 
 .button {
   padding-left: 0em !important;
   padding-right: 0em !important;
+}
+
+
+body {
+  background-color: #1B1C1D !important;
+}
+
+.ui.toggle.checkbox{
+  /* Big Checkbox */
+  -ms-transform: scale(3); /* IE */
+  -moz-transform: scale(3); /* FF */
+  -webkit-transform: scale(3); /* Safari and Chrome */
+  -o-transform: scale(3); /* Opera */
+  transform: scale(3);
+  padding: 1.250em;
+}
+
+.ui.form {
+  padding: 4em;
+}
+
+.column>*{
+  height: 100% !important;
 }

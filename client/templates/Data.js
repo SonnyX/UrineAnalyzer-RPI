@@ -6,12 +6,21 @@ Template.Data.onRendered(function () {
     if (properties.hasOwnProperty('id')) {
       let data = SensorCollections[properties.id()]// Take the right collection "pH,Na,K or Cl"
       if (data) {
-        data = data.find({}).fetch();
+        data = data.find({},{sort:{date:1}}).fetch();
         Chart.addData(chart,properties.id(),data) // add Values and titles in the chart
       }
     }
   });
 });
+
+Template.DataOptions.onCreated(function () {
+  reactive = new ReactiveVar('txt')
+  this.data.active = reactive.get();
+});
+
+Template.DataOptions.onRendered(function(){
+  $('.ui.inline.dropdown').dropdown();
+})
 
 
   var ranges = [
