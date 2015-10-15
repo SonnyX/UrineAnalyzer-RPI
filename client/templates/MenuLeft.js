@@ -6,7 +6,7 @@ Template.MenuLeft.onRendered(function() {
 })
 */
 
-MenuItems = new Mongo.Collection(null);
+SideMenuItems = new Mongo.Collection(null);
 
 items = [
   { icon:"grid layout", label:"Overview", href:"/" },
@@ -23,17 +23,13 @@ items = [
 ];
 
 items.forEach(function(item){
-  MenuItems.insert(item);
+  SideMenuItems.insert(item);
 })
-
-Template.MenuLeft.onCreated(function () {
-  reactive = new ReactiveVar(items);
-  console.log(reactive);
-});
 
 
 Template.MenuLeft.helpers({
   items: function() {
-    return MenuItems.find({});
+    return SideMenuItems.find({});
+    ;
   }
 })

@@ -6,22 +6,3 @@
   </div>
     <div id="chart"></div>
 </template>
-
-<template name="DataOptions">
-<h4 class="ui header inverted">
-  <i class="setting icon"></i>
-  <div class="content">
-    Showing the last
-    <div class="ui inline dropdown">
-      <div class="text">{{active}}</div>
-      <div class="menu">
-        <div class="header">Number of Samples</div>
-        {{#each items}}
-          <div class="item" data-text="{{item}}">{{item}}</div>
-        {{/each}}
-      </div>
-    </div>
-    Samples
-  </div>
-</h4>
-</template>

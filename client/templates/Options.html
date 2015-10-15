@@ -1,0 +1,23 @@
+<template name="DataOptions">
+  <h4 class="ui header inverted">
+    <i class="setting icon"></i>
+    {{#if Template.subscriptionsReady}}
+    <div class="content">
+      Showing the last
+      <div class="ui inline dropdown">
+          <div class="text">{{active.item}}</div>
+        <div class="menu">
+          <div class="header">Number of Samples</div>
+          {{#each items}}
+            <div class="item" data-text="{{this}}">{{this}}</div>
+          {{/each}}
+        </div>
+      </div>
+      Samples
+    </div>
+    {{else}}
+      loading...
+    {{/if}}
+  </h4>
+  <!--{{#if Template.subscriptionsReady}}-->
+</template>
