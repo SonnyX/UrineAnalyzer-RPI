@@ -17,3 +17,9 @@ FlowRouter.route('/data/:id', {
     BlazeLayout.render('Main', { content:'Data'});
   }
 });
+
+FlowRouter.route('/options', {
+  action: function(params) {
+    BlazeLayout.render('Main', { content:'Options'});
+  }
+});

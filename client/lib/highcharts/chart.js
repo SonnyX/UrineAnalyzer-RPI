@@ -9,7 +9,7 @@ Chart = {
   cartesianize(items,y,x){
     let data = []
     items.forEach(function(item){
-      data.push({y:item[y],x:item[x].getTime()});
+      data.unshift({y:item[y],x:item[x].getTime()});
     })
     return data;
   },

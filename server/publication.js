@@ -6,15 +6,16 @@ if (Meteor.isServer) {
 	  return Outputs.find({});
 	});
 	Meteor.publish("ph", function(argument){
-		return SensorCollections.ph.find({},{sort:{date:-1}});
+		console.log(argument);
+		return SensorCollections.ph.find({},{sort:{date:-1},limit:argument});
 	});
 	Meteor.publish("na", function(argument){
-		return SensorCollections.na.find({},{sort:{date:-1}});
+		return SensorCollections.na.find({},{sort:{date:-1},limit:argument});
 	});
 	Meteor.publish("k", function(argument){
-		return SensorCollections.k.find({},{sort:{date:-1}});
+		return SensorCollections.k.find({},{sort:{date:-1},limit:argument});
 	});
 	Meteor.publish("cl", function(argument){
-		return SensorCollections.cl.find({},{sort:{date:-1}});
+		return SensorCollections.cl.find({},{sort:{date:-1},limit:argument});
 	});
 }

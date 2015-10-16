@@ -1,41 +1,27 @@
-Template.DataOptions.onCreated(function () {
-  var self = this;
-  this.data.id = FlowRouter.getParam('id');
-  self.autorun(function(){
-     self.subscribe("options");
-  });
+Template.Options.helpers({
+  sensors(){
+    return ['pH','Na','K','Cl']
+  }
 });
 
-Template.DataOptions.helpers({
+Template.SamplesAmount.helpers({
   active(){
-    if(Template.instance().subscriptionsReady())
-      return Options.findOne({'option':'SamplesAmount','sensor':this.id},{reactive:false});
+    let data = Options.findOne({'option':'SamplesAmount','data.sensor':this.toLowerCase()},{reactive:false}).data
+    return data
   },items(){
-    if(Template.instance().subscriptionsReady())
-      return Options.findOne({'option':'SamplesOptions'}).items;
+    return Options.findOne({'option':'SamplesOptions'}).data.items;
   }
 });
 
-Template.DataOptions.events({
+Template.SamplesAmount.events({
   "click .item": function(event, template){
+    self = this;
+    var selector = {'option':'SamplesAmount','data.sensor':template.data.toLowerCase()}
+    var modifier = {'data.item':this.valueOf()}
+    Meteor.call("updateOptions", selector,modifier);
   }
 });
 
-/*Template.DataOptions.onRendered(function(){
-  var self = this;
-  this.autorun(function(){
-     if(self.subscriptionsReady()){
-       self.$('.ui.inline.dropdown').dropdown();
-     }
-  });
-});*/
-
-Template.DataOptions.rendered = function(){
-  var self = this
-  console.log(this);
-  Tracker.autorun(function(){
-    if(self.subscriptionsReady()){
-      console.log($('.ui.inline.dropdown').dropdown());
-    }
-  });
-};
+Template.SamplesAmount.onRendered(function(){
+  this.$('.ui.inline.dropdown').dropdown();
+});

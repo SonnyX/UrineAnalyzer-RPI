@@ -1,7 +1,12 @@
-<template name="DataOptions">
+<template name="Options">
+    {{#each sensors}}
+      {{>SamplesAmount}}
+    {{/each}}
+</template>
+
+<template name="SamplesAmount">
   <h4 class="ui header inverted">
-    <i class="setting icon"></i>
-    {{#if Template.subscriptionsReady}}
+    {{this}}
     <div class="content">
       Showing the last
       <div class="ui inline dropdown">
@@ -15,9 +20,5 @@
       </div>
       Samples
     </div>
-    {{else}}
-      loading...
-    {{/if}}
   </h4>
-  <!--{{#if Template.subscriptionsReady}}-->
 </template>

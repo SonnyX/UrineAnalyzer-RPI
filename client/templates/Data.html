@@ -1,8 +1,14 @@
 <template name="Data">
+  {{#if Template.subscriptionsReady}}
   <div class="ui grid">
     <div id="DataOptions" class="column container">
-      {{>DataOptions}}
+      {{#with id}}
+        {{>SamplesAmount}}
+      {{/with}}
     </div>
   </div>
-    <div id="chart"></div>
+  {{else}}
+    <div class="ui active large inverted loader"></div>
+  {{/if}}
+  <div id="chart"></div>
 </template>
