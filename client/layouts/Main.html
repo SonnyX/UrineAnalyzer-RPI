@@ -1,12 +1,12 @@
 <template name="Main">
 	{{#if Template.subscriptionsReady}}
-	{{> MenuLeft}}
-	<div class="pusher">
-		{{> MenuTop}}
-		<div class="ui basic inverted segment">
-			{{> Template.dynamic template=content}}
+		{{> MenuLeft}}
+		<div class="pusher">
+			{{> MenuTop}}
+			<div class="ui basic inverted segment">
+				{{> Template.dynamic template=content}}
+			</div>
 		</div>
-	</div>
 	{{else}}
 		<div class="ui active large inverted loader"></div>
 	{{/if}}

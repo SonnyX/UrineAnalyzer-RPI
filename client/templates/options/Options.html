@@ -1,0 +1,13 @@
+<template name="Options">
+  {{#each sensors}}
+  <h4 class="ui header inverted">
+    {{data.sensor}}
+    <div class="content">
+      Showing the last
+      {{>SamplesAmountDropdown}}
+      Samples from
+      {{>DateTimePicker}}
+    </div>
+  </h4>
+  {{/each}}
+</template>

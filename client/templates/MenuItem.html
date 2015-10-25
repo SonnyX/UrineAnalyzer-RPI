@@ -1,11 +1,11 @@
 <template name="MenuItem">
-	<a class="{{item}} {{hidden}} item" href="{{href}}">
-		{{#if icon}}
-  			<i class="{{icon}} icon"></i>
-		{{/if}}
-		{{label}}
-	</a>
-	{{#each items}}
-		{{> MenuItem}}
-	{{/each}}
+		<a class="{{item}} {{hidden}} item" href="{{href}}">
+			{{#if icon}}
+	  			<i class="{{icon}} icon"></i>
+			{{/if}}
+			{{label}}
+		</a>
+		{{#each items}}
+			{{> MenuItem}}
+		{{/each}}
 </template>

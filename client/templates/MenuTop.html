@@ -1,12 +1,16 @@
 <template name="MenuTop">
 	<div class="ui inverted huge top fixed menu">
 		{{#each leftItems}}
-			{{> MenuItem}}
+			{{#with data}}
+				{{> MenuItem}}
+			{{/with}}
 		{{/each}}
 
 		<div class="right menu">
 			{{#each rightItems}}
-				{{> MenuItem}}
+				{{#with data}}
+					{{> MenuItem}}
+				{{/with}}
 			{{/each}}
 		</div>
 	</div>

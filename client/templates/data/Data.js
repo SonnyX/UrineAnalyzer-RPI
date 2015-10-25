@@ -3,11 +3,12 @@ Template.Data.onCreated(function () {
   let self = this;
   this.autorun(function(){
     self.data.id = FlowRouter.getParam("id");
-    let limit = Options.findOne({'option':'SamplesAmount','data.sensor':self.data.id}).data.item
-    self.subscribe(self.data.id,limit);
+    self.data.reactData = new ReactiveVar(Options.findOne(
+      {'option':'SamplesAmount','data.sensor':self.data.id}
+    ));
+    self.subscribe("sensor",{'sensor':self.data.id,'limit':self.data.reactData.get().data.item});
   });
 });
-
 
 Template.Data.onRendered(function () {
   let chart = Chart.build(); //Create Chart

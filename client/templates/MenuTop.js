@@ -10,11 +10,11 @@ Template.MenuTop.events({
 Template.MenuTop.helpers({
 
 	leftItems: function() {
-		return [ { icon: "grid layout", hidden: "", label: "Menu" } ]
+		return Options.find({'option':'TopMenuItem','data.position':'left'});
 	},
 
 	rightItems: function() {
-		return [ { icon: "sign in", hidden: "", label: "Login" } ]
+		return Options.find({'option':'TopMenuItem','data.position':'right'});
 	}
 
 })

@@ -24,6 +24,9 @@ Chart = {
         plotBorderWidth: null,
         plotShadow: false,
       },
+      credits:{
+        enabled:false
+      },
       legend: {
         enabled:false
       },

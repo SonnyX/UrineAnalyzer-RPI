@@ -5,17 +5,9 @@ if (Meteor.isServer) {
 	Meteor.publish("outputs", function (argument) {
 	  return Outputs.find({});
 	});
-	Meteor.publish("ph", function(argument){
-		console.log(argument);
-		return SensorCollections.ph.find({},{sort:{date:-1},limit:argument});
-	});
-	Meteor.publish("na", function(argument){
-		return SensorCollections.na.find({},{sort:{date:-1},limit:argument});
-	});
-	Meteor.publish("k", function(argument){
-		return SensorCollections.k.find({},{sort:{date:-1},limit:argument});
-	});
-	Meteor.publish("cl", function(argument){
-		return SensorCollections.cl.find({},{sort:{date:-1},limit:argument});
+	Meteor.publish("sensor", function({sensor,limit}){
+		if(limit == "All")
+			limit = undefined;
+		return SensorCollections[sensor].find({},{sort:{date:-1},limit:limit});
 	});
 }

@@ -2,7 +2,7 @@ BlazeLayout.setRoot('body');
 
 FlowRouter.route('/', {
   action: function() {
-    BlazeLayout.render('Main', { content: 'Grid'});
+    BlazeLayout.render('Main', { content: 'Overview'});
   }
 });
 
