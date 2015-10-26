@@ -1,11 +1,9 @@
 <template name="Data">
-  {{#if Template.subscriptionsReady}}
   <div class="ui top attached right floated basic inverted buttons">
-    {{#with reactData.get}}
+    {{#with samplesAmount}}
       {{>SamplesAmountDropdown}}
       {{>DateTimePicker}}
     {{/with}}
   </div>
-  {{/if}}
   <div id="chart"></div>
 </template>

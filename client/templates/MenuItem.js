@@ -1,5 +1,5 @@
 
-
+//Event of showing or hidding a sub menu in the LeftMenuItens
 Template.MenuItem.events({
   "click a": function(event, template){
     if (this.items) {

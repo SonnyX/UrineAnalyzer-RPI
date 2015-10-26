@@ -1,3 +1,4 @@
+//Subscribe to the latest sample of each sensor
 Template.Overview.onCreated(function () {
   let self = this;
   this.autorun(function(){
@@ -11,10 +12,10 @@ Template.Overview.onCreated(function () {
 Template.Overview.helpers({
   Buttons: function(){
     let data = Object();//Create empty Object
-    /*for each property inside the collection (ph,na,cl and k)*/
+    //for each property inside the collection (ph,na,cl and k)
     for (var property in SensorCollections) {
       if (SensorCollections.hasOwnProperty(property)) {
-        /*add in the empty object the last element of each collection*/
+        //add in the empty object the last element of each collection
         data[property] = SensorCollections[property].findOne({},{sort:{date:-1}})
       }
     };
@@ -24,6 +25,7 @@ Template.Overview.helpers({
 
 var noValue = 'No Value';
 
+//Auxiliar function that gives the directions of each button in the Overview.
 function SensorButtons({ph={value:noValue},na={value:noValue},cl={value:noValue},k={value:noValue}}){
   return([
     {label:'pH',value:ph.value,ref:'/data/ph'},

@@ -1,12 +1,13 @@
-
+//Subscription to the correct collection with the given limits.
+//all done inside an autorun to garantee the reactivity of the Subscription.
 Template.Data.onCreated(function () {
   let self = this;
   this.autorun(function(){
     self.data.id = FlowRouter.getParam("id");
-    self.data.reactData = new ReactiveVar(Options.findOne(
+    self.data.samplesAmount = Options.findOne(
       {'option':'SamplesAmount','data.sensor':self.data.id}
-    ));
-    self.subscribe("sensor",{'sensor':self.data.id,'limit':self.data.reactData.get().data.item});
+    );
+    self.subscribe("sensor",{'sensor':self.data.id,'limit':self.data.samplesAmount.data.item});
   });
 });
 

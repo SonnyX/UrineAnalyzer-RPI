@@ -6,7 +6,7 @@ Template.MenuLeft.onRendered(function() {
 })
 */
 
-
+//Search in the Options collection all the SideMenuItens
 Template.MenuLeft.helpers({
   items: function() {
     return Options.find({'option':'SideMenuItem'})
