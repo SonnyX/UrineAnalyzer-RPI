@@ -3,7 +3,7 @@
 		"killMeteorOnExit": false,
 		"packageApp": false,
 		"runOnStartup": false,
-		"appName": "myApp",
+		"appName": "Urine Analyzer",
 		"platform": "linux",
 		"arch": "x64",
 		"out": "",

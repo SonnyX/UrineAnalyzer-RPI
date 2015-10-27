@@ -12,5 +12,7 @@ Template.SamplesAmountDropdown.events({
 });
 
 Template.SamplesAmountDropdown.onRendered(function(){
-  this.$('.dropdown').dropdown();
+  this.$('.dropdown').dropdown({
+    action:'hide'
+  });
 });
