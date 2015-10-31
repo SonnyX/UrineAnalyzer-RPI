@@ -2,10 +2,11 @@
 Template.Overview.onCreated(function () {
   let self = this;
   this.autorun(function(){
-    self.subscribe('sensor',{sensor:'ph',limit:1});
-    self.subscribe("sensor",{sensor:'na',limit:1});
-    self.subscribe('sensor',{sensor:'k',limit:1});
-    self.subscribe("sensor",{sensor:'cl',limit:1});
+    self.subscribe('sensor',{sensor:'ph',item:1});
+    self.subscribe("sensor",{sensor:'na',item:1});
+    self.subscribe('sensor',{sensor:'k',item:1});
+    self.subscribe("sensor",{sensor:'cl',item:1});
+    //self.subscribe('newSensor',{sensors:['ph','na','k','cl'],item:1});
   });
 });
 

@@ -5,8 +5,9 @@ Template.SamplesAmountDropdown.helpers({
 });
 Template.SamplesAmountDropdown.events({
   "click .item": function(event, template){
-    var selector = {'option':template.data.option,'_id':template.data._id}
-    var modifier = {'data.item':this.valueOf()}
+    let value = this.valueOf();
+    let selector = {'option':template.data.option,'_id':template.data._id}
+    let modifier = {'data.item':value}
     Meteor.call("updateOptions", selector,modifier);
   }
 });
