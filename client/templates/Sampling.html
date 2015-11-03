@@ -4,7 +4,9 @@
   </div>
   <a class="ui black label">
     <h3 class="ui inverted header">
-      Start collecting samples every {{>Spinbox value="15" size="mini" }} minutes
+      Start collecting samples every
+      {{>Spinbox value=samplingFreq.value size="mini" isOnlyNatural=true }} 
+      minutes
     </h3>
   </a>
 </template>

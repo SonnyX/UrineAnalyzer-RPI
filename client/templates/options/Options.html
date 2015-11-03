@@ -1,15 +1,28 @@
 <template name="Options">
-  {{#each sensors}}
   <h4 class="ui header inverted">
-    {{data.sensor}}
     <div class="content">
       Showing the last
-      {{>SamplesAmountDropdown}}
+      {{>OptionsDropdown option=samplesOptions header="Number of Samples"}}
       Samples from
-      {{>DateTimePicker}}
+      {{>DateTimePicker option=samplesOptions}}
     </div>
   </h4>
-  {{/each}}
-  
+
   {{>Sampling}}
+
+  <h4 class="ui header inverted">
+    <div class="content">
+      Last time the pH buffer was changed
+      {{> DateTimePicker option=pHBuffer}}
+    </div>
+  </h4>
+
+  <h4 class="ui header inverted">
+    <div class="content">
+      Calibrating sensors every
+      {{>OptionsDropdown option=calibrationOptions header="Frequency"}}
+      minute
+    </div>
+  </h4>
+
 </template>

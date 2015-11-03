@@ -1,9 +1,7 @@
 <template name="Data">
   <div class="ui top attached right floated basic inverted buttons">
-    {{#with SamplesOptions}}
-      {{>SamplesAmountDropdown}}
-      {{>DateTimePicker}}
-    {{/with}}
+    {{>OptionsDropdown option=samplesOptions header="Number of Samples"}}
+    {{>DateTimePicker option=samplesOptions}}
   </div>
   <div id="chart"></div>
 </template>

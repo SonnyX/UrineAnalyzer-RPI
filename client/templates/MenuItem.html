@@ -6,6 +6,8 @@
 			{{label}}
 		</a>
 		{{#each items}}
-			{{> MenuItem}}
+			<div class='hidden {{parentLabel ..}}'>
+				{{> MenuItem}}
+			</div>
 		{{/each}}
 </template>

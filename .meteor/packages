@@ -27,5 +27,6 @@ flemay:less-autoprefixer
 semantic:ui-css
 matb33:collection-hooks
 sarasate:semantic-ui-datetimepicker
-momentjs:moment
 reactive-var
+momentjs:moment
+msavin:mongol

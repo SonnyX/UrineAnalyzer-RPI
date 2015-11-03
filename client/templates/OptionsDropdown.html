@@ -1,9 +1,9 @@
-<template name="SamplesAmountDropdown">
+<template name="OptionsDropdown">
   <div class="ui top right pointing dropdown button">
-    <div>{{data.item}}</div>
+    {{option.item}}
     <div class="menu">
-      <div class="header">Number of Samples</div>
-      {{#each items}}
+      <div class="header">{{header}}</div>
+      {{#each option.items}}
       <div class="item">{{this}}</div>
       {{/each}}
     </div>

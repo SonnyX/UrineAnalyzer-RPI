@@ -2,11 +2,7 @@
 Template.Overview.onCreated(function () {
   let self = this;
   this.autorun(function(){
-    self.subscribe('sensor',{sensor:'ph',item:1});
-    self.subscribe("sensor",{sensor:'na',item:1});
-    self.subscribe('sensor',{sensor:'k',item:1});
-    self.subscribe("sensor",{sensor:'cl',item:1});
-    //self.subscribe('newSensor',{sensors:['ph','na','k','cl'],item:1});
+    self.subscribe('sensors',{date:undefined});
   });
 });
 
@@ -16,8 +12,10 @@ Template.Overview.helpers({
     //for each property inside the collection (ph,na,cl and k)
     for (var property in SensorCollections) {
       if (SensorCollections.hasOwnProperty(property)) {
-        //add in the empty object the last element of each collection
-        data[property] = SensorCollections[property].findOne({},{sort:{date:-1}})
+        if(typeof SensorCollections[property] == 'object'){
+          //add in the empty object the last element of each collection
+          data[property] = SensorCollections[property].findOne({},{sort:{date:-1}})
+        }
       }
     };
     return SensorButtons(data);

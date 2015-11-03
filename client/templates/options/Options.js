@@ -1,7 +1,14 @@
 //Gather all the SamplesAmount from the Options collection,
 //setting reactivity to false for performances purposes and to avoid conflicts.
+
 Template.Options.helpers({
-  sensors: function(){
-    return Options.find({'option':'SamplesAmount'},{reactive:false});
+  samplesOptions(){
+    return Options.findOne({_id:'SamplesOptions'})
+  },
+  pHBuffer(){
+    return Options.findOne({_id:'PhBuffer'});
+  },
+  calibrationOptions(){
+    return Options.findOne({_id:'CalibrationOptions'});
   }
 });

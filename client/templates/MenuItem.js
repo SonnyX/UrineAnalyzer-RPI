@@ -1,19 +1,18 @@
 
 //Event of showing or hidding a sub menu in the LeftMenuItens
+Template.MenuItem.helpers({
+  parentLabel: function(parentContext){
+    return parentContext.label;
+  }
+});
 Template.MenuItem.events({
   "click a": function(event, template){
     if (this.items) {
-      this.items.forEach(function(item){
-        item.hidden = hidden(item.hidden)
-      })
-      let parent = Template.parentData(1);
-      let selector = {option:parent.option,_id:parent._id};
-      let modifier = {'data.items':this.items}
-      Meteor.call("updateOptions",selector,modifier);
+      let internItems = template.$('.'+this.label);
+      if(internItems.hasClass('hidden'))
+        internItems.removeClass('hidden')
+      else
+        internItems.addClass('hidden');
     }
   }
 });
-
-let hidden = function(hidden){
-  return hidden == "" ? "hidden" : "";
-}

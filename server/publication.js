@@ -1,20 +1,14 @@
 
-	Meteor.publish("options", function (argument) {
-		return Options.find({});
-	});
-	Meteor.publish("outputs", function (argument) {
-		return Outputs.find({});
-	});
-	Meteor.publish("sensor", function({sensor,item,date}){
-		if(!date){
-			date = SensorCollections[sensor].findOne({},{sort:{date:-1},limit:item}).date;
-		}
-		if(item == "All")
-		item = undefined;
-		let dayAfter = moment(date).add(1,'days').toDate();
-		let col = SensorCollections[sensor].find(
-			{date:{$gte:date,$lt:dayAfter}},
-			{sort:{date:-1},limit:item}
-		)
-		return col;
-	});
+Meteor.publish("options", function (argument) {
+	return Options.find({});
+});
+Meteor.publish("outputs", function (argument) {
+	return Outputs.find({});
+});
+Meteor.publish("sensors", function({date}){
+	if(!date){
+		date = moment(SensorCollections.lastInsertion())
+		date = date.startOf('day').add(date.utcOffset(),'minutes').toDate();
+	}
+	return SensorCollections.samplesFromDate(date);
+});
