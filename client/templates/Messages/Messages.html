@@ -1,0 +1,7 @@
+<template name="Messages">
+	{{#if Template.subscriptionsReady}}
+		{{#each messages}}
+			{{> Message}}
+		{{/each}}
+	{{/if}}
+</template>

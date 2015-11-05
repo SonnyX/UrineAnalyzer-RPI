@@ -30,3 +30,4 @@ sarasate:semantic-ui-datetimepicker
 reactive-var
 momentjs:moment
 msavin:mongol
+benmgreene:moment-range

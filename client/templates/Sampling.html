@@ -1,12 +1,26 @@
-<template name="Sampling">
+<template name="Sampling2">
   <div class="ui positive circular icon button">
     <i class="play icon"></i>
   </div>
   <a class="ui black label">
     <h3 class="ui inverted header">
       Start collecting samples every
-      {{>Spinbox value=samplingFreq.value size="mini" isOnlyNatural=true }} 
+      {{>Spinbox value=samplingFreq.value size="mini" isOnlyNatural=true }}
       minutes
     </h3>
   </a>
+</template>
+
+<template name="Sampling">
+  <div class="ui header small inverted">
+    <i class="large icons">
+      <i class="link big inverted green circle icon"></i>
+      <i class="link inverted play icon"></i>
+    </i>
+    <div class="content">
+      Start collecting samples every
+      {{>Spinbox value=samplingFreq.value size="mini" isOnlyNatural=true }}
+      minutes
+    </div>
+  </div>
 </template>

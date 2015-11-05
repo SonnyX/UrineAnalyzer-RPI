@@ -1,13 +1,13 @@
 <template name="Overview">
-  {{#if Template.subscriptionsReady}}
     <div class="ui grid">
       {{#each Buttons}}
         <div class="eight wide column">
-          {{>SensorButton}}
+            {{>SensorButton}}
         </div>
       {{/each}}
     </div>
+    {{#if Template.subscriptionsReady}}
     {{else}}
-  		<div class="ui active large inverted loader"></div>
-  {{/if}}
+      {{>Loader text="Loading samples collections"}}
+    {{/if}}
 </template>

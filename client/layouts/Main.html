@@ -6,8 +6,9 @@
 			<div class="ui basic inverted segment">
 				{{> Template.dynamic template=content}}
 			</div>
+			{{>MessagesFooter}}
 		</div>
-	{{else}}
-		<div class="ui active large inverted loader"></div>
+		{{else}}
+			{{>Loader text="Loading Options collections"}}
 	{{/if}}
 </template>

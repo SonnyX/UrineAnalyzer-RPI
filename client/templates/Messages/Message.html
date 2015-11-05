@@ -1,0 +1,18 @@
+<template name="Message">
+	<div class="ui attached large {{type}} message transition hidden">
+		{{#if closeBtn}}<i class="close icon closeBtn"></i>{{/if}}
+		<div class="ui header">
+			<div class="content">
+				{{header}}
+				<div class="sub header">
+					<p>{{message}}</p>
+				</div>
+			</div>
+			{{#with extraBtn}}
+				<div class="ui positive button extraBtn">
+					{{text}}
+				</div>
+			{{/with}}
+		</div>
+	</div>
+</template>

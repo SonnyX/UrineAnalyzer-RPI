@@ -41,3 +41,7 @@ body {
 .column>*{
   height: 100% !important;
 }
+
+.bottom.menu{
+  background-color: transparent !important;
+}

@@ -1,0 +1,9 @@
+<template name="MenuLeft">
+	<div class="ui inverted labeled icon left vertical sidebar menu">
+		{{#with menuItems}}
+			{{#each items}}
+				{{> MenuItem}}
+			{{/each}}
+		{{/with}}
+	</div>
+</template>

@@ -6,3 +6,16 @@ Template.Main.onCreated(function () {
     self.subscribe("options");
   });
 });
+
+Meteor.setInterval(function () {
+  Session.set("currentTime",new Date());
+}, 3000);
+
+Template.Main.onRendered(function(){
+  let self = this;
+  this.autorun(function(){
+     if(self.subscriptionsReady()){
+       verifyPhBuffer();
+     }
+  });
+})
