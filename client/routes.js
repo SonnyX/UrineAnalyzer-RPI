@@ -13,13 +13,20 @@ FlowRouter.route('/outputs', {
 });
 
 FlowRouter.route('/data/:id', {
-  action: function(params) {
+  action: function(params,queryParams) {
     BlazeLayout.render('Main', { content:'Data'});
   }
 });
+
 
 FlowRouter.route('/options', {
   action: function(params) {
     BlazeLayout.render('Main', { content:'Options'});
   }
 });
+
+FlowRouter.notFound = {
+    action: function() {
+      BlazeLayout.render('Main', { content: 'Overview'});
+    }
+};

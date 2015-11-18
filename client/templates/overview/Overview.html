@@ -5,9 +5,13 @@
             {{>SensorButton}}
         </div>
       {{/each}}
+      {{>SamplingButton}}
     </div>
     {{#if Template.subscriptionsReady}}
     {{else}}
       {{>Loader text="Loading samples collections"}}
     {{/if}}
+  <!--{{#SamplesGrid }}
+    {{>SampleButton}}
+  {{/SamplesGrid}}-->
 </template>

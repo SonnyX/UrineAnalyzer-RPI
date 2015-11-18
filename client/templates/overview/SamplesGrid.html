@@ -1,0 +1,10 @@
+<template name="SamplesGrid">
+  <div class="ui grid">
+    {{#each samples}}
+    <div class="eight wide column">
+    {{> UI.contentBlock this}}
+    </div>
+    {{/each}}
+    {{>SamplingButton}}
+  </div>
+</template>

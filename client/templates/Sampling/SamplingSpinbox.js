@@ -1,10 +1,10 @@
-Template.Sampling.helpers({
-  samplingFreq: function(){
+Template.SamplingSpinbox.helpers({
+  samplingFreq(){
     return Options.findOne({_id:'SamplingFreq'});
   }
 });
 
-Template.Sampling.events({
+Template.SamplingSpinbox.events({
   "change input": function(event, template){
     if(this.value != event.target.value)
      Options.update({_id:'SamplingFreq'}, {$set:{

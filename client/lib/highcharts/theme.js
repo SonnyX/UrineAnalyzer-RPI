@@ -87,7 +87,8 @@ Highcharts.darkUnicaTheme = {
          },
          marker: {
             lineColor: '#333'
-         }
+         },
+         //color:"#2b908f"
       },
       boxplot: {
          fillColor: '#505053'

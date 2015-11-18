@@ -8,6 +8,6 @@ verifyPhBuffer = function verifyPhBuffer(){
     Meteor.call('messages.clear','PhBufferMsg');
     Meteor.setTimeout(function () {
       verifyPhBuffer();
-    }, (difference*(-1))*8.64e+7);//
+    }, (difference*(-1))*8.64e+7/*1 day*/);
   }
 }

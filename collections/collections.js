@@ -1,6 +1,14 @@
 Options = new Mongo.Collection("options");
 Outputs = new Mongo.Collection("outputs");
 Messages = new Mongo.Collection("messages");
+SensorsDB = {
+  analysis: new Mongo.Collection('analysis',{
+    transform(doc) {
+      return new Analysis(doc);
+    }
+  }),
+  samplesPerHour: new Mongo.Collection('samples')
+}
 SensorCollections = {
 	ph:new Mongo.Collection("ph"),
 	na:new Mongo.Collection("na"),
@@ -51,6 +59,28 @@ Options.allow({
 	}
 });
 Messages.allow({
+	insert: function(){
+		return true;
+	},
+	update: function(){
+		return true;
+	},
+	remove: function(){
+		return true;
+	}
+});
+SensorsDB.samplesPerHour.allow({
+	insert: function(){
+		return true;
+	},
+	update: function(){
+		return true;
+	},
+	remove: function(){
+		return true;
+	}
+});
+SensorsDB.analysis.allow({
 	insert: function(){
 		return true;
 	},

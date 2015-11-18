@@ -54,8 +54,22 @@ Chart = {
         shared: true,
         xDateFormat: '%d/%m/%Y %H:%M:%S',
         pointFormat: '{series.name} <b>{point.y}</b>'
-      },
-      series: [{
+      }/*,
+        series: [{
+            data: [29.9, 68.15, 106.4, 129.2, 144.0, 176.0, null, 148.5, 216.4, 194.1, 95.6, 54.4],
+            pointInterval: 900000,
+            pointStart: moment().valueOf()
+        }, {
+            data: [144.0, 176.0, 135.6, 148.5, 216.4, null, 95.6, 54.4, 29.9, 71.5, 106.4, 129.2],
+            pointInterval: 840000,
+            pointStart: moment().add(3,'hours').valueOf()
+        },
+        {
+            data: [144.0, 176.0, 162.25, 148.5, 216.4, 156, 95.6, 62.75, 29.9, 68.15, 106.4, 129.2],
+            pointInterval: 840000,
+            pointStart: moment().add(3,'hours').valueOf()
+        }]*/,
+        series: [{
           name: 'Data',
           //data: options.averages,
           zIndex: 1,

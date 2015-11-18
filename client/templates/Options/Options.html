@@ -1,27 +1,35 @@
 <template name="Options">
-  <h4 class="ui header inverted">
-    <div class="content">
-      Showing the last
-      {{>OptionsDropdown option=samplesOptions header="Number of Samples"}}
-      Samples from
-      {{>DateTimePicker samplesOptions}}
-    </div>
-  </h4>
+  <div class="ui center aligned container">
+    <h2 class="ui header inverted">
+      <div class="content">
+        Showing the last
+        {{>OptionsDropdown option=samplesOptions header="Number of Samples"}}
+        Samples from
+        {{>DateTimePicker samplesOptions}}
+      </div>
+    </h2>
 
-  {{>Sampling}}
+    <h2 class="header inverted">
+      <div class="content">
+        Collecting samples every
+          {{>SamplingSpinbox}}
+        minute(s)
+      </div>
+    </h2>
 
-  <h4 class="ui header inverted">
-    <div class="content">
-      Last time the pH buffer was changed
-      {{> DateTimePicker pHBuffer}}
-    </div>
-  </h4>
+    <h2 class="ui header inverted">
+      <div class="content">
+        Last time the pH buffer was changed
+        {{> DateTimePicker pHBuffer}}
+      </div>
+    </h2>
 
-  <h4 class="ui header inverted">
-    <div class="content">
-      Calibrating sensors every
-      {{>OptionsDropdown option=calibrationOptions header="Frequency"}}
-      minute
-    </div>
-  </h4>
+    <h2 class="ui header inverted">
+      <div class="content">
+        Calibrating sensors every
+        {{>OptionsDropdown option=calibrationOptions header="Frequency"}}
+        minutes
+      </div>
+    </h2>
+  </div>
 </template>

@@ -45,3 +45,25 @@ body {
 .bottom.menu{
   background-color: transparent !important;
 }
+
+#butaum{
+  position: absolute;
+  left:50%;
+  top: 50%;
+}
+#absolute{
+  position: absolute;
+  left: 50%;
+  top:50%;
+  padding: 0 !important;
+}
+#relative{
+  position: relative;
+  left: -50%;
+  top: -1.25em;
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+}

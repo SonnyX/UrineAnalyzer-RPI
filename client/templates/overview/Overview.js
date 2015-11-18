@@ -22,7 +22,17 @@ Template.Overview.helpers({
   }
 });
 
-var noValue = 'No Value';
+Template.Overview.events({
+  "click a": function(event, template){
+    event.preventDefault();
+    FlowRouter.go('/data/:id',{id:this.label.toLowerCase()})
+    //FlowRouter.go('/data/:id',{id:this.type})
+    //let date = moment(this.timeStamp).startOf('day').toDate();
+    //Meteor.call('SamplesOptions.date',date)
+  }
+});
+
+noValue = 'No Value';
 
 //Auxiliar function that gives the directions of each button in the Overview.
 function SensorButtons({ph={value:noValue},na={value:noValue},cl={value:noValue},k={value:noValue}}){

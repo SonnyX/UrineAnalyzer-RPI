@@ -4,6 +4,8 @@ Template.Main.onCreated(function () {
   let self = this;
   this.autorun(function(){
     self.subscribe("options");
+    self.subscribe('analysis');
+    self.subscribe('samples');
   });
 });
 
