@@ -6,6 +6,43 @@ Chart = {
       //chart.series[1].setData(ranges);
     }
   },
+  _getSamples(analysis,id){
+    let data = [];
+    SensorsDB.samplesPerHour.find(
+      {_id:{$regex:new RegExp(analysis._id+'$'),$options:'m'}}
+    ).fetch().map(function(samplesPerHour,i){
+      samplesPerHour.samples.map(function(sample,i){
+        if(i <= this.counter){
+          if (sample.hasOwnProperty(id)) {
+            sample['y'] = sample[id];
+            delete sample[id];
+          }
+          data = data.concat(sample)
+        }
+      },analysis)
+    });
+    return data;
+  },
+  addSeries(chart,analysis,id){
+    let self = this;
+    if(!chart)
+      throw Error('chart does not exist');
+    analysis.forEach(function(analysis){
+      chart.addSeries({
+        data:self._getSamples(analysis,id),
+        pointStart: analysis.firstDate + moment().utcOffset()*60*1000,
+        pointInterval:parseInt(analysis.frequency)*60*1000
+      })
+    },analysis)
+  },
+  setSeries(chart,analysis,id,i){
+    let self = this;
+    if(!chart)
+      throw Error('chart does not exist');
+    if(i >= 0){
+      chart.series[i].setData(self._getSamples(analysis,id))
+    }
+  },
   cartesianize(items,y,x){
     let data = []
     items.forEach(function(item){
@@ -28,7 +65,7 @@ Chart = {
         enabled:false
       },
       legend: {
-        enabled:false
+        enabled:true
       },
       xAxis: {
         type: 'datetime',
@@ -49,26 +86,35 @@ Chart = {
           color: '#808080'
         }]
       },
+      plotOptions:{
+        series:{
+          cursor:'pointer',
+          events:{
+            click: function(event){
+              if (!this.visible) {
+                return false;
+              }
+              let i = this.index
+              let series = this.chart.series;
+              for (serie of series) {
+                if(serie.index != i){
+                  serie.hide()
+                }
+              }
+              console.log(series);
+              this.chart.redraw();
+            return false;
+            }
+          }
+        }
+      },
       tooltip: {
         crosshairs: true,
         shared: true,
-        xDateFormat: '%d/%m/%Y %H:%M:%S',
-        pointFormat: '{series.name} <b>{point.y}</b>'
-      }/*,
-        series: [{
-            data: [29.9, 68.15, 106.4, 129.2, 144.0, 176.0, null, 148.5, 216.4, 194.1, 95.6, 54.4],
-            pointInterval: 900000,
-            pointStart: moment().valueOf()
-        }, {
-            data: [144.0, 176.0, 135.6, 148.5, 216.4, null, 95.6, 54.4, 29.9, 71.5, 106.4, 129.2],
-            pointInterval: 840000,
-            pointStart: moment().add(3,'hours').valueOf()
-        },
-        {
-            data: [144.0, 176.0, 162.25, 148.5, 216.4, 156, 95.6, 62.75, 29.9, 68.15, 106.4, 129.2],
-            pointInterval: 840000,
-            pointStart: moment().add(3,'hours').valueOf()
-        }]*/,
+        xDateFormat: '<b>%H:%M<b>',
+        pointFormat: '<b>{point.y}</b>'
+      },
+        series: []/*,
         series: [{
           name: 'Data',
           //data: options.averages,
@@ -87,7 +133,7 @@ Chart = {
           color: Highcharts.getOptions().colors[0],
           fillOpacity: 0.3,
           zIndex: 0
-      }]
+      }]*/
     });
   }
 };

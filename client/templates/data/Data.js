@@ -4,8 +4,7 @@ Template.Data.onCreated(function () {
   let self = this;
   this.samplesOptions = new ReactiveVar();
   this.autorun(function(){
-    self.samplesOptions.set(Options.findOne({_id:'SamplesOptions'}))
-    self.subscribe("sensors",self.samplesOptions.get());
+    self.samplesOptions.set(Options.findOne({_id:'SamplesOptions'}));
   });
 });
 
@@ -18,15 +17,28 @@ Template.Data.helpers({
 Template.Data.onRendered(function () {
   let chart = Chart.build(); //Create Chart
   let self = this;
+  let current = moment(self.samplesOptions.get().date);
+
   this.autorun(function(){
     let id = FlowRouter.getParam('id')
+    chart.setTitle({text:id});
     if(self.subscriptionsReady()){
-      // Take the right collection "pH,Na,K or Cl"
-      let limit = self.samplesOptions.get().item
-      if(limit == 'All')
-        limit = undefined;
-      let data = SensorCollections[id].find({},{sort:{date:-1},limit:limit}).fetch();
-      Chart.addData(chart,id,data); // add Values and titles in the chart
+      let {date} = self.samplesOptions.get()
+      if(!current.isSame(date)){
+        while(chart.series.length > 0)
+          chart.series[0].remove(true);
+        current = moment(date)
+      }
+      let analysis = SensorsDB.analysis.find(
+        {firstDate:{$gte:date.getTime(),$lt:moment(date).add(1,'days').valueOf()}},
+        {sort:{firstDate:1}}
+      ).fetch();
+      if (!chart.series.length) {
+        Chart.addSeries(chart,analysis,id)
+      }else{
+        let i = analysis.length -1;
+        Chart.setSeries(chart,analysis[i],id,i);
+      }
     }
   });
 });

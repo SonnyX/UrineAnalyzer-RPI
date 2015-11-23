@@ -1,17 +1,31 @@
 <template name="MenuTop">
 	<div class="ui inverted huge top fixed menu">
+		{{#each contentLeftItems}}
+			{{#MenuItem}}
+				{{> Template.dynamic template=template data=data}}
+			{{/MenuItem}}
+		{{/each}}
 		{{#with items}}
 			{{#each leftItems}}
-					{{> MenuItem}}
+				{{>MenuItem}}
 			{{/each}}
 		{{/with}}
 		<div class="right menu">
+			{{#each contentRightItems}}
+				{{#MenuItem}}
+					{{> Template.dynamic template=template data=data}}
+			 	{{/MenuItem}}
+			{{/each}}
 			{{#with items}}
 				{{#each rightItems}}
-						{{> MenuItem}}
+					{{>MenuItem}}
 				{{/each}}
 			{{/with}}
 		</div>
 	</div>
 	<div id="gambiarra"></div>
+</template>
+
+<template name="teste">
+	teste
 </template>

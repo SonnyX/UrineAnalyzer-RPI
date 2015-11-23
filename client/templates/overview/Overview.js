@@ -25,10 +25,9 @@ Template.Overview.helpers({
 Template.Overview.events({
   "click a": function(event, template){
     event.preventDefault();
-    FlowRouter.go('/data/:id',{id:this.label.toLowerCase()})
-    //FlowRouter.go('/data/:id',{id:this.type})
-    //let date = moment(this.timeStamp).startOf('day').toDate();
-    //Meteor.call('SamplesOptions.date',date)
+    //FlowRouter.go('/data/:id',{id:this.label.toLowerCase()})
+    FlowRouter.go('/data/:id',{id:this.type})
+    Meteor.call('SamplesOptions.date',moment(this.timeStamp).startOf('day').toDate())
   }
 });
 

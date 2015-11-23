@@ -9,7 +9,7 @@ Template.DateTimePicker.events({
     e.date = e.date.startOf('day');
     if (!e.date.isSame(this.date))
       Options.update({_id:this._id}, {$set:{date:e.date.toDate()}});
-    $('.ui.button').popup('hide'); // Hides the popup
+    $('#dateButton').popup('hide'); // Hides the popup
   }
 });
 
@@ -21,9 +21,9 @@ Template.DateTimePicker.onRendered(function() {
       format: 'DD/MM/YYYY',
       showTodayButton:true,
       defaultDate: self.date,
-      maxDate:moment().endOf('day')
+      //maxDate:moment().endOf('day')
     });
-  this.$('.ui.button').popup({
+  this.$('#dateButton').popup({
     position:'bottom right',
     on    : 'click'
   });

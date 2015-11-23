@@ -46,12 +46,7 @@ body {
   background-color: transparent !important;
 }
 
-#butaum{
-  position: absolute;
-  left:50%;
-  top: 50%;
-}
-#absolute{
+.absoluteCenter{
   position: absolute;
   left: 50%;
   top:50%;

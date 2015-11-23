@@ -1,5 +1,5 @@
 <template name="Overview">
-    <div class="ui grid">
+    <!--<div class="ui grid">
       {{#each Buttons}}
         <div class="eight wide column">
             {{>SensorButton}}
@@ -10,8 +10,8 @@
     {{#if Template.subscriptionsReady}}
     {{else}}
       {{>Loader text="Loading samples collections"}}
-    {{/if}}
-  <!--{{#SamplesGrid }}
+    {{/if}}-->
+  {{#SamplesGrid }}
     {{>SampleButton}}
-  {{/SamplesGrid}}-->
+  {{/SamplesGrid}}
 </template>

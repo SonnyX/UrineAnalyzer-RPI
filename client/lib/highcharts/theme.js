@@ -31,7 +31,8 @@ Highcharts.darkUnicaTheme = {
       style: {
          color: '#E0E0E3',
          textTransform: 'uppercase',
-         fontSize: '20px'
+         fontSize: '20px',
+         fontWeight:'bold'
       }
    },
    subtitle: {
@@ -44,7 +45,9 @@ Highcharts.darkUnicaTheme = {
       gridLineColor: '#707073',
       labels: {
          style: {
-            color: '#E0E0E3'
+            color: '#E0E0E3',
+            fontWeight:'bold',
+            fontSize:'15px'
          }
       },
       lineColor: '#707073',
@@ -61,7 +64,9 @@ Highcharts.darkUnicaTheme = {
       gridLineColor: '#707073',
       labels: {
          style: {
-            color: '#E0E0E3'
+            color: '#E0E0E3',
+            fontWeight:'bold',
+            fontSize:'15px'
          }
       },
       lineColor: '#707073',
@@ -75,10 +80,19 @@ Highcharts.darkUnicaTheme = {
       }
    },
    tooltip: {
-      backgroundColor: 'rgba(0, 0, 0, 0.85)',
+      backgroundColor: 'rgba(27,28,29,0.85)',
       style: {
-         color: '#F0F0F0'
-      }
+         color: '#F0F0F0',
+         padding: 10,
+         fontWeight: 'bold',
+         fontSize: '20px',
+         whitespace:'normal !important',
+         textAlign: 'center'
+      },
+      //shadow: false,
+      borderWidth: 1,
+      borderRadius:20,
+      useHtml:true
    },
    plotOptions: {
       series: {
@@ -86,9 +100,10 @@ Highcharts.darkUnicaTheme = {
             color: '#B0B0B3'
          },
          marker: {
-            lineColor: '#333'
+            lineColor: '#333',
+            symbol:'circle'
          },
-         //color:"#2b908f"
+         color:"#2b908f"
       },
       boxplot: {
          fillColor: '#505053'
@@ -102,13 +117,18 @@ Highcharts.darkUnicaTheme = {
    },
    legend: {
       itemStyle: {
-         color: '#E0E0E3'
+         color: '#E0E0E3',
+         fontSize:'20px'
       },
       itemHoverStyle: {
          color: '#FFF'
       },
       itemHiddenStyle: {
          color: '#606063'
+      },
+      itemDistance:85,
+      labelFormatter: function(){
+        return ordinal(this.index+1) + ' Analysis'
       }
    },
    credits: {

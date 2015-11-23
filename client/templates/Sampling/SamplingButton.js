@@ -13,11 +13,13 @@ Template.SamplingButton.events({
     let button = template.$(event.currentTarget);
     if(button.hasClass('positive')){
       True(button)
-      Meteor.call("samplingSignal", true);
+      Meteor.call("samplingSignal", true)
+      Session.set("timeId",randomDataGenerator());
     }
     else {
       False(button)
       Meteor.call("samplingSignal", false);
+      Meteor.clearInterval(Session.get("timeId"))
     }
   }
 });

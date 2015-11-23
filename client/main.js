@@ -11,3 +11,8 @@ verifyPhBuffer = function verifyPhBuffer(){
     }, (difference*(-1))*8.64e+7/*1 day*/);
   }
 }
+
+ordinal = function ordinal(n) {
+  let s=["th","st","nd","rd"],v=n%100;
+  return n+(s[(v-20)%10]||s[v]||s[0]);
+}
