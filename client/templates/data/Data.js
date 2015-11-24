@@ -17,28 +17,29 @@ Template.Data.helpers({
 Template.Data.onRendered(function () {
   let chart = Chart.build(); //Create Chart
   let self = this;
-  let current = moment(self.samplesOptions.get().date);
-
+  let currentDate = moment(self.samplesOptions.get().date);
+  let currentId = FlowRouter.getParam('id')
   this.autorun(function(){
     let id = FlowRouter.getParam('id')
     chart.setTitle({text:id});
     if(self.subscriptionsReady()){
       let {date} = self.samplesOptions.get()
-      if(!current.isSame(date)){
+      if(!currentDate.isSame(date)){
         while(chart.series.length > 0)
           chart.series[0].remove(true);
-        current = moment(date)
+        currentDate = moment(date)
       }
       let analysis = SensorsDB.analysis.find(
         {firstDate:{$gte:date.getTime(),$lt:moment(date).add(1,'days').valueOf()}},
         {sort:{firstDate:1}}
       ).fetch();
-      if (!chart.series.length) {
-        Chart.addSeries(chart,analysis,id)
-      }else{
-        let i = analysis.length -1;
-        Chart.setSeries(chart,analysis[i],id,i);
+      for (let i = 0; i < analysis.length; i++) {
+        if (chart.series.length < analysis.length)
+          Chart.addSeries(chart,analysis[i],id)
+        if(chart.series[i].data.length < analysis[i].counter+1 || currentId != id)
+          Chart.setSeries(chart,analysis[i],id,i);
       }
+      currentId = id;
     }
   });
 });

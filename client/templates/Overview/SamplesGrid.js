@@ -7,9 +7,9 @@ Template.SamplesGrid.helpers({
       for (var property in samples[i-1]) {
         if (samples[i-1].hasOwnProperty(property)) {
           if(samples[i-1][property] != null || (i-1) == 0){
-            let {label,href,measure} = SamplesController[property];
-            let type=property,value=samples[i-1][property]||noValue;
-            array.push({type,value,label,href,measure,timeStamp})
+            let {label,measure} = Options.findOne({_id:property})
+            let type=property,value=samples[i-1][property]||'No Value';
+            array.push({type,value,label,measure,timeStamp})
           }
         }
       }

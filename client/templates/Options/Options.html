@@ -2,10 +2,8 @@
   <div class="ui center aligned container">
     <h2 class="ui header inverted">
       <div class="content">
-        Showing the last
-        {{>OptionsDropdown option=samplesOptions header="Number of Samples"}}
-        Samples from
-        {{>DateTimePicker samplesOptions}}
+        Showing Samples from
+        {{>DateTimePicker Options = "SamplesOptions"}}
       </div>
     </h2>
 
@@ -20,7 +18,7 @@
     <h2 class="ui header inverted">
       <div class="content">
         Last time the pH buffer was changed
-        {{> DateTimePicker pHBuffer}}
+        {{> DateTimePicker Options = "PhBuffer"}}
       </div>
     </h2>
 

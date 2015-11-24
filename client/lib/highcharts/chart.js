@@ -8,16 +8,17 @@ Chart = {
   },
   _getSamples(analysis,id){
     let data = [];
+    let counter = 0;
     SensorsDB.samplesPerHour.find(
       {_id:{$regex:new RegExp(analysis._id+'$'),$options:'m'}}
     ).fetch().map(function(samplesPerHour,i){
       samplesPerHour.samples.map(function(sample,i){
-        if(i <= this.counter){
+        if(counter++ <= this.counter){
           if (sample.hasOwnProperty(id)) {
             sample['y'] = sample[id];
             delete sample[id];
           }
-          data = data.concat(sample)
+          data = data.concat(sample);
         }
       },analysis)
     });
@@ -27,13 +28,11 @@ Chart = {
     let self = this;
     if(!chart)
       throw Error('chart does not exist');
-    analysis.forEach(function(analysis){
-      chart.addSeries({
-        data:self._getSamples(analysis,id),
-        pointStart: analysis.firstDate + moment().utcOffset()*60*1000,
-        pointInterval:parseInt(analysis.frequency)*60*1000
-      })
-    },analysis)
+    chart.addSeries({
+      data:self._getSamples(analysis,id),
+      pointStart: analysis.firstDate + moment().utcOffset()*60*1000,
+      pointInterval:parseInt(analysis.frequency)*60*1000
+    })
   },
   setSeries(chart,analysis,id,i){
     let self = this;
@@ -65,7 +64,7 @@ Chart = {
         enabled:false
       },
       legend: {
-        enabled:true
+        enabled:false
       },
       xAxis: {
         type: 'datetime',
@@ -91,17 +90,13 @@ Chart = {
           cursor:'pointer',
           events:{
             click: function(event){
-              if (!this.visible) {
-                return false;
-              }
               let i = this.index
               let series = this.chart.series;
               for (serie of series) {
                 if(serie.index != i){
-                  serie.hide()
+                  serie.visible ? serie.hide() : serie.show()
                 }
               }
-              console.log(series);
               this.chart.redraw();
             return false;
             }
