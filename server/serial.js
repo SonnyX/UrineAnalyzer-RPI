@@ -1,93 +1,58 @@
-var SerialPort = Meteor.npmRequire("serialport")
+let serialport = Npm.require("serialport")
+let SerialPort = serialport.SerialPort
 
-Serial = {
+Serial = class Serial {
+	constructor(onOpen) {
+		this.onOpen = onOpen
+		this.port = 'undefined'
+		this.baudrate = 115200
+		this.connect()
+	}
 
-  "options": {
-    baudrate: 115200,
-    parser: SerialPort.parsers.readline("\n")
-  },
+	connect() {
+		let self = this
 
-  "portId": undefined,
+		serialport.list(function (error, ports) {
+			if (typeof(ports) !== 'undefined') {
+				ports = ports.filter(function (port) {
+					return (port.pnpId.indexOf('Texas_Instruments') !== -1)
+				})
 
-  "portHandle": undefined,
+				if (ports.length !== 0) {
+					console.log('#Serial: MSP432 found')
+					self.port = ports[0].comName
+					self.serialHandle = new SerialPort(self.port, {
+		 				baudrate: self.baudrate,
+		 				parser: Parser
+					})
 
-  "callbacks": {
-    updateOutput: function(args) {
-      var pins = args.pins;
-      var values = args.values;
+					self.open()
+					return;
+				}
+			}
+			self.port = 'undefined'
+			console.log('#Serial: Unable to find MSP432!')
+		})
+	}
 
-      if (pins.length == values.length) {
-        for (i = 0; i < pins.length; i++) {
-          var state = { pin: pins[i], value: values[i] }
-          console.log(state)
-          OutputsController.update(state)
-        }
-      }
-    },
-    sensorReading: function(args) {
-    //  console.log("Sensor: " + args.value)
-    }
-  },
+	open() {
+		let self = this
+		this.serialHandle.open(function (error) {
+			if (error) {
+				console.log(`#Serial: could not open serial port: ${error}`)
+			}
+			else {
+				console.log(`#Serial: ${self.port} connection successful`)
+				self.onOpen()
+			}
+		})
+	}
 
-  "connect": function () {
-    SerialPort.list(Meteor.bindEnvironment(function (error, ports) {
-      ports.forEach(function (port) {
-        console.log(port)
-        Serial.portId = port.pnpId
-        Serial.portHandle = new SerialPort.SerialPort(port.comName, Serial.options)
-        Serial.portHandle.on("open", Meteor.bindEnvironment(function () {
-          Serial.opened()
-        }))
-      })
-    }))
-  },
+	on(type, callback) {
+		this.serialHandle.on(type, callback)
+	}
 
-  "opened": function () {
-    console.log("=> Serial: Connected")
-    Serial.portHandle.on("data", Meteor.bindEnvironment(function (data) {
-      try {
-        var msg = JSON.parse(data)
-        console.log("Serial >> " + data)
-
-        if (msg.hasOwnProperty('id')) {
-          callback = Serial.callbacks[msg.id]
-          callback(msg.args)
-        }
-      }
-      catch (err) {
-        console.log(err.message)
-      }
-    }))
-  },
-
-  // Make sure the serial connection is still valid
-  "watchdog": function () {
-    if (typeof Serial.portHandle == "undefined") {
-      console.log("=> Serial: Attempting to connect!")
-      Serial.connect()
-    }
-    else {
-      SerialPort.list(Meteor.bindEnvironment(function (error, ports) {
-        var found = _.find(ports, function(port) {
-          return port.pnpId == Serial.portId
-        })
-
-        if (typeof found == "undefined") {
-          console.log("=> Serial: Connection Lost!")
-          Serial.portHandle = undefined
-        }
-      }))
-    }
-  },
-
-  "write": function(msg) {
-    if (Serial.portHandle) {
-      console.log("Serial << " + msg)
-
-      Serial.portHandle.write(msg, function (error, results) {
-        if (error) console.log("Write Error: " + results)
-      })
-    }
-  }
-
+	write(data) {
+		this.serialHandle.write(data)
+	}
 }

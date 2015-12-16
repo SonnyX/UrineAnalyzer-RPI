@@ -12,5 +12,8 @@ Template.Options.helpers({
   },
   calibrationOptions(){
     return Options.findOne({_id:'CalibrationOptions'});
+  },
+  samplingFreq(){
+    return Options.findOne({_id:'SamplingFreq'});
   }
 });

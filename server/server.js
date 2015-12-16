@@ -3,13 +3,22 @@ Meteor.startup(function () {
   /*Meteor.setInterval(function () {
     Serial.watchdog();
   }, 10000);*/
-  Meteor.call('verifyOptions');
-});
 
-//Do not delete!!!
-/*[
-  { _id: 'NyxkYYqQMJ7qYCYmR', pin: 8, value: 0 },
-  { _id: 'T4o9bBKrXrKz5yzhH', pin: 13, value: 0 },
-  { _id: 'M4qZNwtCDoMDyN8Zr', pin: 12, value: 255 },
-  { _id: 'xrAgNShxYhHM2WTcp', pin: 11, value: 0 }
-]*/
+  Services.initialize(Meteor.bindEnvironment(function () {
+
+  	Services.subscribe(Meteor.bindEnvironment(function (data) {
+      console.log(data);
+      if(data.id == 0){
+        let datum = [
+          data.args.ph.raw,
+          data.args.na.raw,
+          data.args.k.raw,
+            data.args.cl.raw,
+          0,
+          data.args.conductivity.raw
+        ]
+        AnalysisController.dataReceived({data:datum,date:+moment(),counter:data.args.counter})
+      }
+  	}))
+  }));
+})

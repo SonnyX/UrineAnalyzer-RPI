@@ -1,3 +1,6 @@
+aldeed:autoform@4.2.2
+aldeed:simple-schema@1.1.0
+aldeed:template-extension@3.4.3
 autoupdate@1.2.3
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
@@ -24,6 +27,7 @@ diff-sequence@1.0.1
 ecmascript@0.1.5
 ecmascript-collections@0.1.6
 ejson@1.0.7
+elevatedevdesign:autoform-nouislider@0.1.0
 es5-shim@4.1.13
 fastclick@1.0.7
 flemay:less-autoprefixer@1.1.0
@@ -45,8 +49,6 @@ maazalik:highcharts@0.4.0
 matb33:collection-hooks@0.8.1
 meteor@1.1.9
 meteor-base@1.0.1
-meteorhacks:async@1.0.0
-meteorhacks:npm@1.5.0
 meteortoys:toykit@2.1.2
 minifiers@1.1.7
 minimongo@1.0.10
@@ -56,12 +58,12 @@ momentjs:moment@2.10.3
 mongo@1.1.2
 mongo-id@1.0.1
 msavin:mongol@1.5.0
-npm-container@1.2.0
 npm-mongo@1.4.39_1
 observe-sequence@1.0.7
 ordered-dict@1.0.4
 promise@0.5.0
 random@1.0.4
+rcy:nouislider@7.0.7_2
 reactive-dict@1.1.2
 reactive-var@1.0.6
 reload@1.1.4

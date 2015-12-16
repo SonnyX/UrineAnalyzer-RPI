@@ -9,16 +9,17 @@ Chart = {
   _getSamples(analysis,id){
     let data = [];
     let counter = 0;
+    Options.findOne({_id:'Data'}).data.forEach(function(datum,i){
+      if(datum._id == id){
+        id =  i;
+      }
+    });
     SensorsDB.samplesPerHour.find(
       {_id:{$regex:new RegExp(analysis._id+'$'),$options:'m'}}
     ).fetch().map(function(samplesPerHour,i){
       samplesPerHour.samples.map(function(sample,i){
         if(counter++ <= this.counter){
-          if (sample.hasOwnProperty(id)) {
-            sample['y'] = sample[id];
-            delete sample[id];
-          }
-          data = data.concat(sample);
+          data = data.concat({y:sample[id]});
         }
       },analysis)
     });
@@ -31,7 +32,7 @@ Chart = {
     chart.addSeries({
       data:self._getSamples(analysis,id),
       pointStart: analysis.firstDate + moment().utcOffset()*60*1000,
-      pointInterval:parseInt(analysis.frequency)*60*1000
+      pointInterval:analysis.frequency
     })
   },
   setSeries(chart,analysis,id,i){

@@ -1,30 +1,18 @@
-var LOW = 0 , HIGH = 255;
+let LOW = 0 , HIGH = 1;
+let DUTYLOW = 0, DUTYHIGH = 301;
 
-var groups = [
-  {template:'Radiobox',items:[
-    {label:"pH",pins:[11,12,13],values:[LOW,HIGH,HIGH]},
-    {label:"Cl-",pins:[11,12,13],values:[LOW,HIGH,LOW]},
-    {label:"K+",pins:[11,12,13],values:[HIGH,LOW,LOW]},
-    {label:"Na+",pins:[11,12,13],values:[LOW,LOW,LOW]},
-  ]},
+let groups = [
   {template:'Checkbox',items:[
-    {label:'Motor',pins:[8],values:[HIGH]}
+    {label:'Valve 1 ',valve:0},
+    {label:'Valve 2 ',valve:1},
+    {label:'Valve 3 ',valve:2},
+    {label:'Valve 4 ',valve:3},
+    {label:'Motor A',pin:0},
+    {label:'Motor B',pin:1},
+    {label:'Pre-Heater',pin:2},
+    {label:'Heater',pin:3},
   ]}
 ]
-
-var items = [
-  {label:"pH",pins:[11,12,13],values:[LOW,HIGH,HIGH],group:'sensor'},
-  {label:"Cl-",pins:[11,12,13],values:[LOW,HIGH,LOW],group:'sensor'},
-  {label:"K+",pins:[11,12,13],values:[HIGH,LOW,LOW],group:'sensor'},
-  {label:"Na+",pins:[11,12,13],values:[LOW,LOW,LOW],group:'sensor'},
-  {label:'Motor',pins:[8],values:[HIGH],group:'motor'},
-  {label:'Motor',pins:[8],values:[LOW],group:'motor'}
-]
-
-OutputsButtons = new Mongo.Collection(null);
-items.forEach(function(item){
-  OutputsButtons.insert(item);
-})
 
 Template.Form.helpers({
   Groups: function(){
@@ -34,13 +22,24 @@ Template.Form.helpers({
 
 Template.Form.events({
   "click .ui.toggle.checkbox": function(event, template){
+    console.log(this);
+
     if ($(event.currentTarget).checkbox("is checked"))
     {
-      //Meteor.call('changeOutput',this.pins,this.values)
+      if(typeof this.valve == 'number'){
+        Meteor.call('setValve',{valve:this.valve,value:HIGH})
+      }
+      else{
+        Meteor.call('setDutyCycle',{pin:this.pin,dutyCycle:DUTYHIGH})
+      }
     }
     else {
-      var values = Array.apply(null, Array(this.values.length)).map(function(){return LOW});
-      //Meteor.call('changeOutput',this.pins,values)
+      if(typeof this.valve == 'number'){
+        Meteor.call('setValve',{valve:this.valve,value:LOW})
+      }
+      else{
+        Meteor.call('setDutyCycle',{pin:this.pin,dutyCycle:DUTYLOW})
+      }
     }
   }
 });
