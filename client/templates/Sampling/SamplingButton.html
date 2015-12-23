@@ -1,9 +1,26 @@
+<!--template name="SamplingButton">
+<div class="absoluteCenter">
+{{#with options}}
+<div id="relative" class="ui massive circular inverted {{button}} icon button">
+<i class="{{icon}} icon"></i>
+</div>
+<div class="ui massive inverted {{button}} icon button">
+<i class="{{icon}} icon"></i>
+</div>
+{{/with}}
+</div>
+</template-->
+
 <template name="SamplingButton">
-  <div class="absoluteCenter">
-    {{#with options}}
-      <div id="relative" class="ui massive circular inverted {{button}} icon button">
+  {{#with options}}
+    <div class="ui huge buttons">
+      <button class="ui huge inverted {{button}} button">
         <i class="{{icon}} icon"></i>
-      </div>
-    {{/with}}
-  </div>
+      </button>
+      <div class="or" data-text=""></div>
+      <button class="ui huge {{button}} button">
+        {{text}} collecting samples
+      </button>
+    </div>
+  {{/with}}
 </template>

@@ -7,10 +7,10 @@
       </div>
     </h2>
 
-    <h2 class="header inverted">
+    <h2 class="ui header inverted">
       <div class="content">
         Collecting samples every
-          {{>SamplingSpinbox}}
+        {{>SamplingSpinbox}}
         {{>OptionsDropdown option=samplingFreq}}
       </div>
     </h2>
@@ -29,5 +29,21 @@
         minutes
       </div>
     </h2>
-  </div>
+
+    <h2 class="ui header inverted">
+      <div class="content">
+        <div class="file">
+          <a id="backupBtn" href="/backup?download=true" class="ui button" target="_parent">
+            Backup Database
+          </a>
+        </div>
+
+      <div class="ui button" id="restoreBtn">
+        Restore Database
+      </div>
+      <input type="file" id="restoreFile" style="display: none">
+    </div>
+  </h2>
+
+</div>
 </template>

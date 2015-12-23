@@ -8,7 +8,7 @@ FlowRouter.route('/', {
 
 FlowRouter.route('/outputs', {
   action: function() {
-    BlazeLayout.render('Main', { content: 'Form'});
+    BlazeLayout.render('Main', { content: 'Outputs'});
   }
 });
 
@@ -24,9 +24,8 @@ FlowRouter.route('/options', {
     BlazeLayout.render('Main', { content:'Options'});
   }
 });
-
-FlowRouter.notFound = {
+/*FlowRouter.notFound = {
     action: function() {
       BlazeLayout.render('Main', { content: 'Overview'});
     }
-};
+};*/

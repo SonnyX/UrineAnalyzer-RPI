@@ -21,11 +21,22 @@ Data.allow({
   remove: function(){
     return true;
   }
-});*/ 
+});*/
 
 
 //just for test.
 Options.allow({
+	insert: function(){
+		return true;
+	},
+	update: function(){
+		return true;
+	},
+	remove: function(){
+		return true;
+	}
+});
+Outputs.allow({
 	insert: function(){
 		return true;
 	},

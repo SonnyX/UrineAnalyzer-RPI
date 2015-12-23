@@ -17,3 +17,17 @@ Template.Options.helpers({
     return Options.findOne({_id:'SamplingFreq'});
   }
 });
+
+
+Template.Options.events({
+  "click #restoreBtn": function(event, template){
+    $('#restoreFile').click();
+  },
+  'change #restoreFile':function(event,template){
+    let file = $(event.currentTarget).get(0).files[0];
+    if(!file) return;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/restore', true);
+    xhr.send(file);
+  }
+});

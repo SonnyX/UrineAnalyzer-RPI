@@ -29,7 +29,6 @@ reactive-var
 momentjs:moment
 msavin:mongol
 benmgreene:moment-range
-jrudio:electron
 
 
-elevatedevdesign:autoform-nouislider
+rcy:nouislider

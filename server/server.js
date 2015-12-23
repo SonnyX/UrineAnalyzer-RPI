@@ -1,10 +1,9 @@
-// Check serial connection every 5s
 Meteor.startup(function () {
   /*Meteor.setInterval(function () {
     Serial.watchdog();
   }, 10000);*/
 
-  Services.initialize(Meteor.bindEnvironment(function () {
+  /*Services.initialize(Meteor.bindEnvironment(function () {
 
   	Services.subscribe(Meteor.bindEnvironment(function (data) {
       console.log(data);
@@ -20,5 +19,5 @@ Meteor.startup(function () {
         AnalysisController.dataReceived({data:datum,date:+moment(),counter:data.args.counter})
       }
   	}))
-  }));
+  }));*/
 })

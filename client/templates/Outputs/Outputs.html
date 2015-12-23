@@ -1,0 +1,43 @@
+<template name="Outputs">
+  {{#if Template.subscriptionsReady}}
+  <div class="ui container">
+    <div class="ui relaxed grid center aligned">
+      {{#each items}}
+      <div class="eight wide column">
+        <div class="ui clearing inverted segment" style="padding:0;">
+          <h1 class="ui left floated inverted header">{{_id}}</h1>
+          <h1 class="ui right floated inverted header">{{percentage}}</h1>
+        </div>
+        {{> Slider}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+</template>
+
+<!--template name="Radiobox">
+  {{#each items}}
+  <div class="eight wide column">
+    <div class="field">
+      <div class="Radiobox ui toggle checkbox">
+        <input name="{{pins}}" type="radio">
+        <label class="Radiobox"><div class='ui inverted header'>{{label}}</div></label>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</template>
+
+<template name="Checkbox">
+  {{#each items}}
+  <div class="eight wide column">
+    <div class="field">
+      <div class="Checkbox ui toggle checkbox">
+        <input name="{{pins}}" type="checkbox">
+        <label><div class='ui inverted header'>{{label}}</div></label>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</template-->
