@@ -2,7 +2,7 @@
 	<div class="ui inverted labeled icon left vertical sidebar menu">
 		{{#with menuItems}}
 			{{#each items}}
-				{{>MenuItem}}
+				{{> Template.dynamic template=template data=data}}
 			{{/each}}
 		{{/with}}
 	</div>

@@ -1,17 +1,15 @@
+Analysis = new Mongo.Collection('analysis',{
+  transform(doc) {
+    return new AnalysisClass(doc);
+  }
+});
+Messages = new MessagesCollection(null);
 Options = new Mongo.Collection("options");
 Outputs = new Mongo.Collection("outputs");
-Messages = new Mongo.Collection("messages");
-SensorsDB = {
-  analysis: new Mongo.Collection('analysis',{
-    transform(doc) {
-      return new Analysis(doc);
-    }
-  }),
-  samplesPerHour: new Mongo.Collection('samples')
-}
+Samples = new Mongo.Collection('samples');
+Settings = new Mongo.Collection('settings');
 
-/*Data = new Mongo.Collection("data");
-Data.allow({
+Settings.allow({
   insert: function(){
     return true;
   },
@@ -21,8 +19,7 @@ Data.allow({
   remove: function(){
     return true;
   }
-});*/
-
+});
 
 //just for test.
 Options.allow({
@@ -47,36 +44,27 @@ Outputs.allow({
 		return true;
 	}
 });
-Messages.allow({
-	insert: function(){
-		return true;
-	},
-	update: function(){
-		return true;
-	},
-	remove: function(){
-		return true;
-	}
+
+Samples.allow({
+  insert: function(){
+    return true;
+  },
+  update: function(){
+    return true;
+  },
+  remove: function(){
+    return true;
+  }
 });
-SensorsDB.samplesPerHour.allow({
-	insert: function(){
-		return true;
-	},
-	update: function(){
-		return true;
-	},
-	remove: function(){
-		return true;
-	}
-});
-SensorsDB.analysis.allow({
-	insert: function(){
-		return true;
-	},
-	update: function(){
-		return true;
-	},
-	remove: function(){
-		return true;
-	}
+
+Analysis.allow({
+  insert: function(){
+    return true;
+  },
+  update: function(){
+    return true;
+  },
+  remove: function(){
+    return true;
+  }
 });

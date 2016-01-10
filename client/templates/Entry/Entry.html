@@ -1,0 +1,31 @@
+<template name="Entry">
+  <div class="ui poiting secondary inverted menu">
+    <a class="item" href="/">
+      <i class="grid layout icon"></i>
+      Overview
+    </a>
+    <a class="{{#unless register}}active{{/unless}} item" data-tab="login">
+      {{#if pswdReset}}
+        <i class="send outline icon"></i>
+        Reset
+      {{else}}
+        <i class="sign in icon"></i>
+        Login
+      {{/if}}
+    </a>
+    <a class="{{#if register}}active{{/if}} item" data-tab="register">
+      <i class="add user icon"></i>
+      Register
+    </a>
+  </div>
+  <div class="ui {{#unless register}}active{{/unless}} tab segment" data-tab="login">
+    {{#if pswdReset}}
+      {{> Reset}}
+    {{else}}
+      {{> Login}}
+    {{/if}}
+  </div>
+  <div class="ui {{#if register}}active{{/if}} tab segment" data-tab="register">
+    {{>Register}}
+  </div>
+</template>

@@ -1,0 +1,12 @@
+<template name="UserItem">
+  {{#if isRoot}}
+    {{#with locker}}
+    <a id="locker" class="item">
+      <i class="{{this.locker}} icon"></i>
+    </a>
+    {{/with}}
+  {{/if}}
+  <a id="User"  class="item">
+    {{username}}
+  </a>
+</template>

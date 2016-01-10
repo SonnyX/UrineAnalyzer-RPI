@@ -4,7 +4,7 @@ Template.Data.onCreated(function () {
   let self = this;
   this.samplesOptions = new ReactiveVar();
   this.autorun(function(){
-    self.samplesOptions.set(Options.findOne({_id:'SamplesOptions'}));
+    self.samplesOptions.set(Options.findOne({_id:'SamplesOptions-'+Meteor.userId()}));
   });
 });
 
@@ -29,15 +29,17 @@ Template.Data.onRendered(function () {
           chart.series[0].remove(true);
         currentDate = moment(date)
       }
-      let analysis = SensorsDB.analysis.find(
+      let analysis = Analysis.find(
         {firstDate:{$gte:date.getTime(),$lt:moment(date).add(1,'days').valueOf()}},
         {sort:{firstDate:1}}
       ).fetch();
       for (let i = 0; i < analysis.length; i++) {
-        if (chart.series.length < analysis.length)
+        if (chart.series.length <= i){
           Chart.addSeries(chart,analysis[i],id)
-        if(chart.series[i].data.length < analysis[i].counter+1 || currentId != id)
+        }
+        if(chart.series[i].data.length < analysis[i].counter+1 || currentId != id){
           Chart.setSeries(chart,analysis[i],id,i);
+        }
       }
       currentId = id;
     }

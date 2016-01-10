@@ -2,7 +2,7 @@ let backup = Npm.require('mongodb-backup');
 var restore = Npm.require('mongodb-restore');
 var fs = Npm.require('fs');
 
-WebApp.connectHandlers.use('/backup',function(req,res,next){
+WebApp.connectHandlers.use('/database/backup',function(req,res,next){
   if(req.method ==='GET'){
     res.writeHead(200, { 'Content-Type': 'application/x-tar' });
     backup({
@@ -19,7 +19,8 @@ WebApp.connectHandlers.use('/backup',function(req,res,next){
   //next()
 })
 
-WebApp.connectHandlers.use('/restore',function(req,res,next){
+
+WebApp.connectHandlers.use('/database/restore',function(req,res,next){
   if(req.method ==='POST'){
     let file = fs.createWriteStream('/home/sunderhus/Desktop/dump/dump.tar');
     file.on('error',function(error){
@@ -36,11 +37,21 @@ WebApp.connectHandlers.use('/restore',function(req,res,next){
         callback:Meteor.bindEnvironment(function(err){
           fs.unlink('/home/sunderhus/Desktop/dump/dump.tar',Meteor.bindEnvironment(function (err){
             if (err) throw err;
-            Meteor.call('messages.show','DbRestorationMsg')
-          }));
+            }));
+          })
         })
-      })
-    }));
-    req.pipe(file); //pipe the request to the file
-  }
-})
+      }));
+      req.pipe(file); //pipe the request to the file
+    }
+  })
+
+  WebApp.connectHandlers.use('/database/samples/csv',function(req,res,next){
+    if(req.method ==='GET'){
+      res.writeHead(200, { 'Content-Type': 'text/csv' });
+      Meteor.call('DbToCSV',Meteor.bindEnvironment(function(error,result){
+        if(error) throw error;
+        res.write(result)
+      }))
+      res.end()
+    }
+  })

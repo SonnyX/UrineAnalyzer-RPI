@@ -1,4 +1,4 @@
-<template name="Options">
+<template name="Settings">
   <div class="ui center aligned container">
     <h2 class="ui header inverted">
       <div class="content">
@@ -18,22 +18,28 @@
     <h2 class="ui header inverted">
       <div class="content">
         Last time the pH buffer was changed
-        {{> DateTimePicker Options = "PhBuffer"}}
+        {{> DateTimePicker Settings = "PhBuffer"}}
       </div>
     </h2>
 
     <h2 class="ui header inverted">
       <div class="content">
         Calibrating sensors every
-        {{>OptionsDropdown option=calibrationOptions header="Frequency"}}
+        {{>SettingsDropdown setting=calibrationOptions header="Frequency"}}
         minutes
       </div>
     </h2>
 
+    <div class="file">
+      <a download="samples.csv" href="/database/samples/csv?download=true" class="ui button" target="_parent">
+        CSV
+      </a>
+    </div>
+
     <h2 class="ui header inverted">
       <div class="content">
         <div class="file">
-          <a id="backupBtn" href="/backup?download=true" class="ui button" target="_parent">
+          <a id="backupBtn" href="/database/backup?download=true" class="ui button" target="_parent">
             Backup Database
           </a>
         </div>
@@ -44,6 +50,7 @@
       <input type="file" id="restoreFile" style="display: none">
     </div>
   </h2>
+
 
 </div>
 </template>

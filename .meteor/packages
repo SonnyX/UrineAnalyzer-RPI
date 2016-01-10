@@ -18,7 +18,6 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 kadira:blaze-layout
 kadira:flow-router
-check
 maazalik:highcharts
 semantic:ui
 flemay:less-autoprefixer
@@ -32,3 +31,6 @@ benmgreene:moment-range
 
 
 rcy:nouislider
+harrison:papa-parse
+accounts-password
+meteorhacks:aggregate

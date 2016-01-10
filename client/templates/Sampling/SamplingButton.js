@@ -1,8 +1,8 @@
 
 Template.SamplingButton.helpers({
   options(){
-    let samplingFreq = Options.findOne({_id:'SamplingFreq'});
-    if(samplingFreq.isActive)
+    let samplingState = Settings.findOne({_id:'SamplingState'});
+    if(samplingState.value)
       return {button:'negative',icon:'stop',color:'red',text:'Stop'};
     return {button:'positive',icon:'play',color:'green',text:'Start'};
   }
@@ -12,14 +12,24 @@ Template.SamplingButton.events({
   "click .button": function(event, template){
     let button = template.$(event.currentTarget);
     if(button.hasClass('positive')){
-      True(button)
-      Meteor.call("samplingSignal", true)
-      Session.set("timeId",randomDataGenerator());
+      Meteor.call("samplingSignal", true,function(error,result){
+        if(error){
+          Messages.newErrorMsg(error);
+          return false;
+        }
+        True(button)
+        Session.set("timeId",randomDataGenerator());
+      })
     }
     else {
-      False(button)
-      Meteor.call("samplingSignal", false);
-      Meteor.clearInterval(Session.get("timeId"))
+      Meteor.call("samplingSignal", false,function(error,result){
+        if(error){
+          Messages.newErrorMsg(error);
+          return false;
+        }
+        False(button)
+        Meteor.clearInterval(Session.get("timeId"))
+      });
     }
   }
 });

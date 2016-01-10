@@ -8,7 +8,7 @@
 		</a>
 		{{#each items}}
 			<div class='hidden {{parentLabel ..}}'>
-				{{> MenuItem}}
+				{{> Template.dynamic template=template data=data}}
 			</div>
 		{{/each}}
 </template>

@@ -1,0 +1,14 @@
+<template name="LicenseMenuItem">
+		<a id="{{label}}" class="{{buttonLicense}}{{item}} {{hidden}} item" href="{{href}}">
+			{{#if icon}}
+	  			<i class="{{icon}} icon"></i>
+			{{/if}}
+			{{label}}
+			{{> UI.contentBlock}}
+		</a>
+		{{#each items}}
+			<div class='hidden {{parentLabel ..}}'>
+				{{> Template.dynamic template=template data=data}}
+			</div>
+		{{/each}}
+</template>

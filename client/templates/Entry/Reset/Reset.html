@@ -1,0 +1,22 @@
+<template name="Reset">
+  {{#if token}}
+  <div class="ui segment">
+    <form id="reset-form" class="ui form">
+      <div class="field">
+        <label>New Password:</label>
+        <input id="reset-password" type="password">
+      </div>
+      <button class="ui button" type="submit">Reset</button>
+    </form>
+  </div>
+  {{else}}
+    <form id="request-form" class="ui form">
+      <div class="field">
+        <label>Email:</label>
+        <input id="request-email" type="email">
+      </div>
+      <button class="ui right floated button" type="submit">Request</button>
+      <button id="back" class="ui left floated button">Back</button>
+    </form>
+  {{/if}}
+</template>

@@ -1,0 +1,12 @@
+<template name="DataItems">
+  {{#each data.data}}
+    {{> DataItem}}
+  {{/each}}
+</template>
+
+
+<template name="DataItem">
+  <a class="item" href="/data/{{_id}}">
+    {{label}}
+  </a>
+</template>

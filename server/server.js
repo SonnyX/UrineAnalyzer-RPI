@@ -12,7 +12,7 @@ Meteor.startup(function () {
           data.args.ph.raw,
           data.args.na.raw,
           data.args.k.raw,
-            data.args.cl.raw,
+          data.args.cl.raw,
           0,
           data.args.conductivity.raw
         ]
@@ -20,4 +20,4 @@ Meteor.startup(function () {
       }
   	}))
   }));*/
-})
+});

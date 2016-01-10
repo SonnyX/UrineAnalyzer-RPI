@@ -9,14 +9,9 @@ Chart = {
   _getSamples(analysis,id){
     let data = [];
     let counter = 0;
-    Options.findOne({_id:'Data'}).data.forEach(function(datum,i){
-      if(datum._id == id){
-        id =  i;
-      }
-    });
-    SensorsDB.samplesPerHour.find(
+    Samples.find(
       {_id:{$regex:new RegExp(analysis._id+'$'),$options:'m'}}
-    ).fetch().map(function(samplesPerHour,i){
+    ).map(function(samplesPerHour,i){
       samplesPerHour.samples.map(function(sample,i){
         if(counter++ <= this.counter){
           data = data.concat({y:sample[id]});
@@ -107,7 +102,7 @@ Chart = {
       tooltip: {
         crosshairs: true,
         shared: true,
-        xDateFormat: '<b>%H:%M<b>',
+        xDateFormat: '<b>%H:%M:%S<b>',
         pointFormat: '<b>{point.y}</b>'
       },
         series: []/*,

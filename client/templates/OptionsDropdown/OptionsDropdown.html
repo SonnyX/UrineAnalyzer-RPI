@@ -9,3 +9,15 @@
     </div>
   </div>
 </template>
+
+<template name="SettingsDropdown">
+  <div class="ui top right pointing {{buttonLicense}} dropdown button">
+    {{setting.item}}
+    <div class="menu">
+      <div class="header">{{header}}</div>
+      {{#each setting.items}}
+      <div class="item">{{this}}</div>
+      {{/each}}
+    </div>
+  </div>
+</template>

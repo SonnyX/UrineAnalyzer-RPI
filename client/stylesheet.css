@@ -1,5 +1,6 @@
-body {
+html, body {
   background-color: #1B1C1D !important;
+  height: 100%;
 }
 
 .hidden {

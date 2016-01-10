@@ -2,7 +2,7 @@
 	<div id="MenuTop" class="ui inverted huge top fixed menu">
 		{{#with items}}
 			{{#each leftItems}}
-				{{>MenuItem}}
+				{{> Template.dynamic template=template data=data}}
 			{{/each}}
 		{{/with}}
 		{{#with dynamicItems}}
@@ -22,7 +22,7 @@
 			{{/with}}
 			{{#with items}}
 				{{#each rightItems}}
-					{{>MenuItem}}
+					{{> Template.dynamic template=template data=data}}
 				{{/each}}
 			{{/with}}
 		</div>

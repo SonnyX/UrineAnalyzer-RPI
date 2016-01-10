@@ -1,0 +1,23 @@
+<template name="UserPopUp">
+  <div id="UserPopUp" class="ui flowing inverted popup transition hidden">
+    {{#if currentUser}}
+      <a id="logout" class="item">
+        <i class="sign out icon"></i>
+        Log Out
+      </a>
+      <a id="register" class="item">
+        <i class="add user icon"></i>
+        Add User
+      </a>
+      <a class="item">
+        <i class="configure icon"></i>
+        Update User
+      </a>
+    {{else}}
+      <a id='login'  class="item">
+        <i class="sign in icon"></i>
+        Log in
+      </a>
+    {{/if}}
+  </div>
+</template>

@@ -7,7 +7,7 @@ Template.Outputs.onCreated(function(){
 
 Template.Outputs.helpers({
   items: function(){
-    return Outputs.find({});
+    return Outputs.find({})
   },
   percentage:function(){
     let prctg = wNumb({
@@ -15,6 +15,37 @@ Template.Outputs.helpers({
       postfix:'%'
     })
     return prctg.to((this.start*100)/this.range.max)
+  }
+});
+
+Template.Outputs.onRendered(function(){
+  let self = this;
+  this.autorun(function(){
+     if(!Settings.findOne({_id:'ActionsLicense'}).released){
+       FlowRouter.go('/');
+     }
+  });
+  $('.accordion').accordion({
+    exclusive:false,
+    selector:{
+      trigger:'.title .header'
+    },
+    onOpen(){
+      $('.'+this.id + ' #automaticButton').removeClass('teal')
+      $('.'+this.id + ' #manualButton').addClass('teal')
+    },
+    onClose(){
+      $('.'+this.id + ' #manualButton').removeClass('teal')
+      $('.'+this.id + ' #automaticButton').addClass('teal')
+    }
+  })
+})
+Template.Outputs.events({
+  "click #automaticButton, click #manualButton": function(event, template){
+     if(!$(event.currentTarget).hasClass('teal')){
+       //console.log($(event.currentTarget).parent());
+       $('.'+this._id +'.title .header').click()
+     }
   }
 });
 

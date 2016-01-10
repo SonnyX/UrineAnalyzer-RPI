@@ -1,6 +1,6 @@
-//Search in the Options collection all the SideMenuItens
+//Search in the Settings collection all the SideMenuItens
 Template.MenuLeft.helpers({
   menuItems(){
-    return Options.findOne({_id:'SideMenuItems'});
+    return Settings.findOne({_id:'SideMenuItems'});
   }
 })

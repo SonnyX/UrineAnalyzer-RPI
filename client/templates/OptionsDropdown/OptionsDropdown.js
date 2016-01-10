@@ -10,4 +10,14 @@ Template.OptionsDropdown.onRendered(function(){
   });
 });
 
-//Meteor.connection._mongo_livedata_collections
+Template.SettingsDropdown.events({
+  "click .item": function(event, template){
+    Settings.update({_id:template.data.option._id}, {$set:{item:this.valueOf()}});
+  }
+});
+
+Template.SettingsDropdown.onRendered(function(){
+  this.$('.dropdown').dropdown({
+    action:'hide'
+  });
+});
