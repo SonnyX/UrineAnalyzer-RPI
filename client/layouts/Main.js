@@ -10,9 +10,11 @@ Template.Main.onCreated(function () {
   });
 });
 
-Meteor.setInterval(function () {
-  Session.set("currentTime",new Date());
-}, 3000);
+Template.Main.helpers({
+  thereIsNothing: function(){
+    return !Settings.find({}).count();
+  }
+});
 
 Template.Main.onRendered(function(){
   let self = this;

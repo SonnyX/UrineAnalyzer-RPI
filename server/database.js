@@ -6,7 +6,7 @@ WebApp.connectHandlers.use('/database/backup',function(req,res,next){
   if(req.method ==='GET'){
     res.writeHead(200, { 'Content-Type': 'application/x-tar' });
     backup({
-      uri: 'mongodb://localhost:3001/meteor',
+      uri: process.env.MONGO_URL || 'mongodb://localhost:3001/meteor',
       // mongodb://<dbuser>:<dbpassword>@<dbdomain>.mongolab.com:<dbport>/<dbdatabase>
       //root: '/home/sunderhus/Desktop/Dump',
       stream:res,
@@ -19,10 +19,9 @@ WebApp.connectHandlers.use('/database/backup',function(req,res,next){
   //next()
 })
 
-
 WebApp.connectHandlers.use('/database/restore',function(req,res,next){
   if(req.method ==='POST'){
-    let file = fs.createWriteStream('/home/sunderhus/Desktop/dump/dump.tar');
+    let file = fs.createWriteStream('./dump.tar');
     file.on('error',function(error){
       console.log('errr: ' + error);
     });
@@ -30,12 +29,12 @@ WebApp.connectHandlers.use('/database/restore',function(req,res,next){
       res.writeHead(204);
       res.end(); //end the respone
       restore({
-        uri: 'mongodb://localhost:3001/meteor',
-        root:'/home/sunderhus/Desktop/dump/',
+        uri: process.env.MONGO_URL || 'mongodb://localhost:3001/meteor',
+        root:'./',
         tar:'dump.tar',
         drop:true,
         callback:Meteor.bindEnvironment(function(err){
-          fs.unlink('/home/sunderhus/Desktop/dump/dump.tar',Meteor.bindEnvironment(function (err){
+          fs.unlink('./dump.tar',Meteor.bindEnvironment(function (err){
             if (err) throw err;
             }));
           })

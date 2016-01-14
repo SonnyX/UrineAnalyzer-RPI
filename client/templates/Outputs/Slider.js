@@ -9,14 +9,16 @@ Template.Slider.onRendered(function(){
     format: wNumb({decimals: 0})
   })
   .on('slide', function (ev, val) {
-    Meteor.call('Outputs.update',self._id,val,function(error,result){
+    Meteor.call('Outputs.update',self._id,self.id,val,function(error,result){
       if(error){
-        Messages.newErrorMsg(error);
-        return false;
+        Messages.newErrorMsg(error)
+        return;
       }
-      Outputs._collection.update(
-        {'outputs._id':self._id},
-        {$set:{'outputs.$.start':val}});
+      if(result && result !== 'success'){
+        Messages.newErrorMsg(result);
+        //$(`[id='${self._id}'].slider`).val(self.start)
+        return;
+      }
     });
   })
   .on('change', function(ev,val){

@@ -1,37 +1,13 @@
-<!--template name="Outputs">
-{{#if Template.subscriptionsReady}}
-<div class="ui container">
-{{#each items}}
-<div class="ui segment">
-<div class="ui relaxed grid center aligned">
-<div class="sixteen wide column">
-<h1 class="ui inverted header">{{_id}}</h1>
-</div>
-{{# each outputs}}
-<div class="eight wide column">
-<div class="ui clearing inverted segment" style="padding:0;">
-<h1 class="ui left floated inverted header">{{_id}}</h1>
-<h1 class="ui right floated inverted header">{{percentage}}</h1>
-</div>
-{{> Slider}}
-</div>
-{{/each}}
-</div>
-</div>
-{{/each}}
-</div>
-{{/if}}
-</template-->
 <template name="Outputs">
     <div class="ui vertical inverted fluid accordion menu">
       {{#each items}}
       <div class="item">
         <a class="{{_id}} title">
           <div class="{{_id}} ui right floated buttons">
-            <div id="automaticButton" class="teal ui button">
+            <div id="automaticButton" class="ui {{automaticButton}} button">
               Auto
             </div>
-            <div id="manualButton" class="ui button">
+            <div id="manualButton" class="ui {{manualButton}} button">
               Manual
             </div>
           </div>
@@ -47,7 +23,7 @@
                 <h1 class="ui left floated inverted header">{{_id}}</h1>
                 <h1 class="ui right floated inverted header">{{percentage}}</h1>
               </div>
-              {{> Slider}}
+              {{> Slider this}}
             </div>
             {{/each}}
           </div>
@@ -56,29 +32,3 @@
       {{/each}}
     </div>
 </template>
-
-<!--template name="Radiobox">
-{{#each items}}
-<div class="eight wide column">
-<div class="field">
-<div class="Radiobox ui toggle checkbox">
-<input name="{{pins}}" type="radio">
-<label class="Radiobox"><div class='ui inverted header'>{{label}}</div></label>
-</div>
-</div>
-</div>
-{{/each}}
-</template>
-
-<template name="Checkbox">
-{{#each items}}
-<div class="eight wide column">
-<div class="field">
-<div class="Checkbox ui toggle checkbox">
-<input name="{{pins}}" type="checkbox">
-<label><div class='ui inverted header'>{{label}}</div></label>
-</div>
-</div>
-</div>
-{{/each}}
-</template-->

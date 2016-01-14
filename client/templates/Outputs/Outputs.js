@@ -1,7 +1,7 @@
 Template.Outputs.onCreated(function(){
   let self = this;
   this.autorun(function(){
-    self.subscribe("outputs");
+    self.subscribe("outputsOriginal");
   });
 })
 
@@ -15,6 +15,12 @@ Template.Outputs.helpers({
       postfix:'%'
     })
     return prctg.to((this.start*100)/this.range.max)
+  },
+  automaticButton(){
+    return this.value ? 'active teal' : ''
+  },
+  manualButton(){
+    return this.value ? '' : 'active teal'
   }
 });
 
@@ -29,23 +35,27 @@ Template.Outputs.onRendered(function(){
     exclusive:false,
     selector:{
       trigger:'.title .header'
-    },
-    onOpen(){
-      $('.'+this.id + ' #automaticButton').removeClass('teal')
-      $('.'+this.id + ' #manualButton').addClass('teal')
-    },
-    onClose(){
-      $('.'+this.id + ' #manualButton').removeClass('teal')
-      $('.'+this.id + ' #automaticButton').addClass('teal')
     }
   })
 })
 Template.Outputs.events({
-  "click #automaticButton, click #manualButton": function(event, template){
-     if(!$(event.currentTarget).hasClass('teal')){
-       //console.log($(event.currentTarget).parent());
-       $('.'+this._id +'.title .header').click()
-     }
+  "click #automaticButton": function(event, template){
+    if(!this.value){
+      Meteor.call('configureLocks',{_id:this._id, id:this.id, value:1},function(error,result){
+        if(error){
+          Messages.newErrorMsg(error);
+        }
+      })
+    }
+  },
+  "click #manualButton":function(event,template){
+    if(this.value){
+      Meteor.call('configureLocks',{_id:this._id, id:this.id, value:0},function(error,result){
+        if(error){
+          Messages.newErrorMsg(error);
+        }
+      })
+    }
   }
 });
 

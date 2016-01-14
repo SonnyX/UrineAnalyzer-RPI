@@ -1,12 +1,16 @@
 <template name="Main">
 	{{#if Template.subscriptionsReady}}
-		{{> MenuLeft}}
-		<div class="pusher">
-			{{> MenuTop}}
-			<div class="ui basic inverted segment">
-				{{> Template.dynamic template=content}}
+		{{#if thereIsNothing}}
+			{{> VerticallyCenterAligned content='RestoreBtn'}}
+		{{else}}
+			{{> MenuLeft}}
+			<div class="pusher">
+				{{> MenuTop}}
+				<div class="ui basic inverted segment">
+					{{> Template.dynamic template=content}}
+				</div>
 			</div>
-		</div>
+		{{/if}}
 		{{else}}
 			{{>Loader text="Loading Settings"}}
 	{{/if}}

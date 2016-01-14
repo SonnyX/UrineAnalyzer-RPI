@@ -1,6 +1,6 @@
 
 Services.initialize = function (continuation) {
-  
+
   Services.serialHandle = new Serial(function () {
     Services.serialHandle.on('data', function (packet) {
       let id = packet.readUInt8(0)
@@ -16,7 +16,6 @@ Services.initialize = function (continuation) {
 
     continuation()
   })
-  
 }
 
 Services.on = function(method, callback) {

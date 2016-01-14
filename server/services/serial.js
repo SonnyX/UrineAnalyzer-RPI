@@ -55,10 +55,12 @@ Serial = class Serial {
 
     serialport.list(function (error, ports) {
       if (typeof(ports) !== 'undefined') {
-        console.log(ports)
 
-        ports = ports.filter(function (port) {
+        /*ports = ports.filter(function (port) {
           return (port.pnpId.indexOf('Texas_Instruments') != -1)
+        })*/
+        ports = ports.filter(function (port) {
+          return (port.manufacturer == 'Texas_Instruments')
         })
 
         if (ports.length !== 0) {
@@ -67,9 +69,21 @@ Serial = class Serial {
           self.serialHandle = new SerialPort(self.port, {
             baudrate: self.baudrate,
             parser: parser
+          },false)
+          self.serialHandle.on('error',function(error){
+            console.log('on error');
           })
+          self.serialHandle.open(function(error){
+            if (error) {
+              console.log(`>> Serial: could not open serial port: ${error}`)
+            }
+            else {
+              console.log(`>> Serial: ${self.port} connection successful`)
+              self.onOpen()
+            }
+          })
+          //self.open()
 
-          self.open()
           return;
         }
       }
@@ -81,13 +95,7 @@ Serial = class Serial {
   open() {
     let self = this
     this.serialHandle.open(function (error) {
-      if (error) {
-        console.log(`>> Serial: could not open serial port: ${error}`)
-      }
-      else {
-        console.log(`>> Serial: ${self.port} connection successful`)
-        self.onOpen()
-      }
+
     })
   }
 
@@ -96,6 +104,19 @@ Serial = class Serial {
   }
 
   write(data) {
-    this.serialHandle.write(data)
+    let self = this
+    this._serialHandler().write(data,function(error,result){
+      if(error){
+        self.connect()
+        throw new Meteor.Error(398,error.toString());
+      }
+    })
+  }
+
+  _serialHandler(){
+    if(this.serialHandle){
+      return this.serialHandle;
+    }
+    throw new Meteor.Error(399, "Unable to find MSP432");
   }
 }

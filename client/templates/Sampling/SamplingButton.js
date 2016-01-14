@@ -17,7 +17,7 @@ Template.SamplingButton.events({
           Messages.newErrorMsg(error);
           return false;
         }
-        True(button)
+        //True(button)
         //Session.set("timeId",randomDataGenerator());
       })
     }
@@ -27,7 +27,7 @@ Template.SamplingButton.events({
           Messages.newErrorMsg(error);
           return false;
         }
-        False(button)
+        //False(button)
         //Meteor.clearInterval(Session.get("timeId"))
       })
     }
