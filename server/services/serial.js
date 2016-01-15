@@ -85,7 +85,8 @@ Serial = class Serial {
         }
         else {
           ports = ports.filter((port) => {
-            return (port.pnpId === this.pnpId)
+            //return (port.pnpId === this.pnpId)
+            return (port.manufacturer == 'Texas_Instruments')
             //return (port.vendorId === this.vendorId)
           })
 
