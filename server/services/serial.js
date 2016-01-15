@@ -47,22 +47,20 @@ Serial = class Serial {
     this.onOpen = onOpen
     this.port = 'undefined'
     this.baudrate = 115200
-    this.connect()
+    this.connect();
   }
 
-  connect() {
+  connect(callback) {
     let self = this
 
     serialport.list(function (error, ports) {
       if (typeof(ports) !== 'undefined') {
-
         /*ports = ports.filter(function (port) {
           return (port.pnpId.indexOf('Texas_Instruments') != -1)
         })*/
         ports = ports.filter(function (port) {
           return (port.manufacturer == 'Texas_Instruments')
         })
-
         if (ports.length !== 0) {
           console.log('>> Serial: MSP432 found')
           self.port = ports[0].comName
@@ -70,32 +68,40 @@ Serial = class Serial {
             baudrate: self.baudrate,
             parser: parser
           },false)
-          self.serialHandle.on('error',function(error){
-            console.log('on error');
+          self.open(callback);
           })
-          self.serialHandle.open(function(error){
-            if (error) {
-              console.log(`>> Serial: could not open serial port: ${error}`)
-            }
-            else {
-              console.log(`>> Serial: ${self.port} connection successful`)
-              self.onOpen()
-            }
-          })
-          //self.open()
-
           return;
         }
       }
       self.port = 'undefined'
       console.log('>> Serial: Unable to find MSP432!')
+      if(callback){callback(false);}
     })
   }
 
-  open() {
+  reconnect(){
+    let self = this;
+    this.connect(function(result){
+      if(!result){
+        return;
+      }
+      if(!self.serialHandle.isOpen()){
+        self.reconnect();
+      }
+    })
+  }
+
+  open(callback) {
     let self = this
     this.serialHandle.open(function (error) {
-
+      if (error) {
+        console.log(`>> Serial: could not open serial port: ${error}`)
+      }
+      else {
+        console.log(`>> Serial: ${self.port} connection successful`)
+        self.onOpen()
+      }
+      if(callback){callback(true);}
     })
   }
 
@@ -104,13 +110,15 @@ Serial = class Serial {
   }
 
   write(data) {
-    let self = this
-    this._serialHandler().write(data,function(error,result){
-      if(error){
-        self.connect()
-        throw new Meteor.Error(398,error.toString());
+    try {
+      this._serialHandler().write(data)
+    } catch (error) {
+      if(error.error == 399){
+        throw error
       }
-    })
+      this.reconnect();
+      throw new Meteor.Error(398,'Unable to find MSP432, trying to reconnect');
+    }
   }
 
   _serialHandler(){
