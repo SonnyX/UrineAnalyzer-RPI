@@ -55,12 +55,14 @@ Serial = class Serial {
 
     serialport.list(function (error, ports) {
       if (typeof(ports) !== 'undefined') {
+
         /*ports = ports.filter(function (port) {
           return (port.pnpId.indexOf('Texas_Instruments') != -1)
         })*/
         ports = ports.filter(function (port) {
           return (port.manufacturer == 'Texas_Instruments')
         })
+
         if (ports.length !== 0) {
           console.log('>> Serial: MSP432 found')
           self.port = ports[0].comName
@@ -69,7 +71,6 @@ Serial = class Serial {
             parser: parser
           },false)
           self.open(callback);
-          })
           return;
         }
       }
