@@ -45,87 +45,101 @@ Serial = class Serial {
 
   constructor(onOpen) {
     this.onOpen = onOpen
-    this.port = 'undefined'
+    this.onDisconnect = null
+
+    this.port = null
+    //this.pnpId = 'pci-Texas_Instruments_XDS110__02.02.04.02__with_CMSIS-DAP_00000000-if00'
+    this.pnpId = 'usb-Texas_Instruments_XDS110__02.02.04.02__with_CMSIS-DAP_00000000-if00'
+    this.vendorId = '0x0x8086'
     this.baudrate = 115200
-    this.connect();
+    this.serialHandle = null
+    this.connect()
+
+    Meteor.setInterval(() => {
+      if (!this.isConnected()) {
+        if (this.serialHandle != null) {
+          console.log(`>> Serial: MSP432 connection lost!`)
+
+          if (this.onDisconnect != null) {
+            this.onDisconnect()
+          }
+
+          this.serialHandle = null
+        }
+
+        this.connect()
+      }
+    }, 3000)
   }
 
-  connect(callback) {
-    let self = this
+  connect() {
+    this.port = null
+    console.log(`>> Serial: Searching for MSP432...`)
 
-    serialport.list(function (error, ports) {
-      if (typeof(ports) !== 'undefined') {
+    try {
+      serialport.list((error, ports) => {
+        //console.log(ports)
 
-        /*ports = ports.filter(function (port) {
-          return (port.pnpId.indexOf('Texas_Instruments') != -1)
-        })*/
-        ports = ports.filter(function (port) {
-          return (port.manufacturer == 'Texas_Instruments')
-        })
+        if (typeof(ports) === 'undefined') {
+          console.log('>> Serial: Unable to find MSP432!')
+        }
+        else {
+          ports = ports.filter((port) => {
+            return (port.pnpId === this.pnpId)
+            //return (port.vendorId === this.vendorId)
+          })
 
-        if (ports.length !== 0) {
-          console.log('>> Serial: MSP432 found')
-          self.port = ports[0].comName
-          self.serialHandle = new SerialPort(self.port, {
-            baudrate: self.baudrate,
-            parser: parser
-          },false)
-          self.open(callback);
-          return;
+          if (ports.length === 0) {
+            console.log('>> Serial: Unable to find MSP432!')
+          }
+          else {
+            console.log('>> Serial: MSP432 found')
+            this.port = ports[0].comName
+            this.serialHandle = new SerialPort(this.port, {
+              baudrate: this.baudrate,
+              parser: parser
+            },false)
+
+            this.open()
+          }
+        }
+      })
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  open() {
+    this.serialHandle.open(error => {
+      if (!error) {
+        console.log(`>> Serial: ${this.port} connection successful`)
+        if (typeof(this.onOpen) !== 'undefined') {
+          this.onOpen()
         }
       }
-      self.port = 'undefined'
-      console.log('>> Serial: Unable to find MSP432!')
-      if(callback){callback(false);}
-    })
-  }
-
-  reconnect(){
-    let self = this;
-    this.connect(function(result){
-      if(!result){
-        return;
-      }
-      if(!self.serialHandle.isOpen()){
-        self.reconnect();
-      }
-    })
-  }
-
-  open(callback) {
-    let self = this
-    this.serialHandle.open(function (error) {
-      if (error) {
-        console.log(`>> Serial: could not open serial port: ${error}`)
-      }
-      else {
-        console.log(`>> Serial: ${self.port} connection successful`)
-        self.onOpen()
-      }
-      if(callback){callback(true);}
     })
   }
 
   on(type, callback) {
-    this.serialHandle.on(type, callback)
+    if (type == 'disconnect') {
+      this.onDisconnect = callback
+    }
+    else {
+      this.serialHandle.on(type, callback)
+    }
+  }
+
+  isConnected() {
+    if ((this.serialHandle == null) || (!this.serialHandle.isOpen())) {
+      return false
+    }
+    return true
   }
 
   write(data) {
-    try {
-      this._serialHandler().write(data)
-    } catch (error) {
-      if(error.error == 399){
-        throw error
-      }
-      this.reconnect();
-      throw new Meteor.Error(398,'Unable to find MSP432, trying to reconnect');
+    if (this.isConnected()) {
+      this.serialHandle.write(data)
     }
-  }
-
-  _serialHandler(){
-    if(this.serialHandle){
-      return this.serialHandle;
-    }
-    throw new Meteor.Error(399, "Unable to find MSP432");
   }
 }

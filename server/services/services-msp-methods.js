@@ -1,16 +1,27 @@
 Services.msp.methods.serialize = function (method, args, buffer, offset) {
-  let service = Services.utils.find(Services.msp.methods.map, 'method', method)
-  service.validateArgs(args)
-  return service.serialize(args, buffer, offset)
+  try {
+    let service = Services.utils.find(Services.msp.methods.map, 'method', method) 
+    service.validateArgs(args)
+    return service.serialize(args, buffer, offset)
+  }
+  catch (error) {
+    throw new Error(`Msp methods serialize throwed: ${error}`)
+  }
 }
 
 Services.msp.methods.deserialize = function (id, packet) {
-  let service = Services.utils.find(Services.msp.methods.map, 'id', id)
-  return { args: service.deserialize(packet) }
+  try {
+    let service = Services.utils.find(Services.msp.methods.map, 'id', id)
+    return { args: service.deserialize(packet) }   
+  }
+  catch (error) {
+    throw new Error(`Msp methods deserialize throwed: ${error}`)
+  }
 }
 
 function validateArray(args) {
   if (!args) throw `@${this.method} - args undefined`
+  
   args.forEach((obj) => {
     if (this.validIds.indexOf(obj.id) == -1) {
       throw `@${this.method} - invalid id: ${obj.id}`
@@ -31,7 +42,7 @@ Services.msp.methods.map = [
     ],
     serialize(args, buffer, offset) {
       buffer.writeUInt8(this.id, offset)
-
+     
       let i = 0;
       args.forEach(function (obj) {
         buffer.writeUInt8(obj.id, offset + 1 + 2*i)
@@ -43,7 +54,7 @@ Services.msp.methods.map = [
     },
     deserialize(payload) {
       let args = []
-
+      
       for (let i = 0; i < payload.length; i += 2) {
         args.push({
           id: payload.readUInt8(i),
@@ -53,7 +64,7 @@ Services.msp.methods.map = [
 
       return args
     }
-  },
+  },  
   {
     id: 0x01,
     method: 'startSampling',
@@ -75,7 +86,7 @@ Services.msp.methods.map = [
   {
     id: 0x02,
     method: 'stopSampling',
-    validateArgs() {
+    validateArgs() { 
     },
     serialize(args, buffer, offset) {
       buffer.writeUInt8(this.id, offset)
@@ -134,7 +145,7 @@ Services.msp.methods.map = [
     },
     deserialize(payload) {
       let args = []
-
+      
       for (let i = 0; i < payload.length; i += 2) {
         args.push({
           id: payload.readUInt8(i),
@@ -167,7 +178,7 @@ Services.msp.methods.map = [
     },
     deserialize(payload) {
       let args = []
-
+      
       for (let i = 0; i < payload.length; i += 3) {
         args.push({
           id: payload.readUInt8(i),
@@ -200,7 +211,7 @@ Services.msp.methods.map = [
     },
     deserialize(payload) {
       let args = []
-
+      
       for (let i = 0; i < payload.length; i += 3) {
         args.push({
           id: payload.readUInt8(i),

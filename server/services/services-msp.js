@@ -10,7 +10,7 @@ Services.msp.send = function (method, args, onResponse) {
   size += Services.type.serialize('request', buffer, size)
   size += Services.msp.methods.serialize(method, args, buffer, size)
   buffer.writeUInt8(size - 2, 1)
-
+  
   Services.serialHandle.write(buffer.slice(0, size))
   Services.msp.callbacks.push({ method, args, onResponse })
 }
