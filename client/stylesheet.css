@@ -1,3 +1,11 @@
+* {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
 html, body {
   background-color: #1B1C1D !important;
   height: 100%;

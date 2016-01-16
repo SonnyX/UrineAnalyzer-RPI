@@ -17,3 +17,13 @@ Template.Settings.helpers({
     return Options.findOne({_id:'SamplingFreq-'+Meteor.userId()});
   }
 });
+
+Template.Settings.events({
+  "click #cleanSamples": function(event, template){
+     Meteor.call('cleanSamples',function(error,result){
+       if(error){
+         Messages.newErrorMsg(error);
+       }
+     });
+  }
+});

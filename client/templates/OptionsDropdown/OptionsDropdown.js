@@ -12,7 +12,7 @@ Template.OptionsDropdown.onRendered(function(){
 
 Template.SettingsDropdown.events({
   "click .item": function(event, template){
-    Settings.update({_id:template.data.option._id}, {$set:{item:this.valueOf()}});
+    Settings.update({_id:template.data.setting._id}, {$set:{item:this.valueOf()}});
   }
 });
 

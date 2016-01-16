@@ -55,6 +55,7 @@ Chart = {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
+        //animation:false
       },
       credits:{
         enabled:false
@@ -67,7 +68,8 @@ Chart = {
         dateTimeLabel:{
           second: '%H:%M:%S'
         },
-        tickPixelInterval: 150
+        tickPixelInterval: 150,
+        allowDecimals:false
       },
       yAxis: {
         labels: {

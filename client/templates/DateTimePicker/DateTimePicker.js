@@ -44,7 +44,7 @@ Template.DateTimePicker.onRendered(function() {
       format: 'DD/MM/YYYY',
       showTodayButton:true,
       defaultDate: self.date,
-      //maxDate:moment().endOf('day')
+      maxDate:moment().endOf('day')
     });
   this.$('.dateButton').popup({
     position:'bottom right',

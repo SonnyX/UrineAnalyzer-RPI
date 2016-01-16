@@ -25,16 +25,30 @@
     <h2 class="ui header inverted">
       <div class="content">
         Calibrating sensors every
-        {{>SettingsDropdown setting=calibrationOptions header="Frequency"}}
+        {{>SettingsDropdown setting=calibrationOptions}}
         minutes
       </div>
     </h2>
 
-    <div class="file">
-      <a download="samples.csv" href="/database/samples/csv?download=true" class="ui button" target="_parent">
-        CSV
-      </a>
-    </div>
+    <h2 class="ui header inverted">
+      <div class="content">
+        <div class="file">
+          <a download="samples.csv" href="/database/samples/csv?download=true" class="ui huge button" target="_parent">
+            CSV
+          </a>
+        </div>
+      </div>
+    </h2>
+
+    <h2 class="ui header inverted">
+      <div class="content">
+        <div id="cleanSamples" class="ui {{buttonLicense}} huge button">
+          Clean Samples
+        </div>
+      </div>
+    </h2>
+
+
 
     <h2 class="ui header inverted">
       <div class="content">
