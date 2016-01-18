@@ -21,9 +21,6 @@ WebApp.connectHandlers.use('/database/backup',function(req,res,next){
 
 WebApp.connectHandlers.use('/database/restore',function(req,res,next){
   if(req.method ==='POST'){
-    if(!Settings.findOne({_id:'Services'}).released){
-      return;
-    }
     let file = fs.createWriteStream('./dump.tar');
     file.on('error',function(error){
       console.log('errr: ' + error);
@@ -35,7 +32,7 @@ WebApp.connectHandlers.use('/database/restore',function(req,res,next){
         uri: process.env.MONGO_URL || 'mongodb://localhost:3001/meteor',
         root:'./',
         tar:'dump.tar',
-        drop:true,
+        //drop:true,
         callback:Meteor.bindEnvironment(function(err){
           fs.unlink('./dump.tar',Meteor.bindEnvironment(function (err){
             if (err) throw err;

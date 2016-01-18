@@ -1,7 +1,7 @@
 
 Meteor.startup(function () {
 	Meteor.call('createAdmin');
-	initialize();
+	//initialize();
 	teste();
 })
 
@@ -25,7 +25,7 @@ initialize = function(){
 
 
 teste = function(){
-	let ONE_WEEK = 6.048e+8;
+	let ONE_DAY = 8.64e+7;
 	let currentTime = moment().subtract(1,'days').endOf('day').valueOf();
 	let observe = Analysis.find({firstDate:{$lt:currentTime}}).observe({
 		added:function(doc){
@@ -36,5 +36,5 @@ teste = function(){
 	Meteor.setInterval(function(){
 		observe.stop();
 		teste();
-	}, ONE_WEEK)
+	}, ONE_DAY)
 }
