@@ -2,7 +2,8 @@
 Template.Spinbox.helpers({
   initialValue: function(){
     if (!isNaN(this.value)) {
-      return parseInt(this.value);
+      let value = parseInt(this.value);
+      return val(value,this.range);
     }
     return 0;
   }
@@ -13,7 +14,7 @@ Template.Spinbox.events({
     let input = template.$('input')[0];
     let value = input.value
     if(!isNaN(value)){
-      input.value = ++value;
+      input.value = val(++value,this.range);
       changeSize(input)
     }
   },
@@ -22,7 +23,7 @@ Template.Spinbox.events({
     let value = input.value;
     if(!isNaN(value)){
       if(!this.isOnlyNatural || value > 0 ){
-        input.value = --value;
+        input.value = val(--value,this.range);
       }
       changeSize(input)
     }
@@ -57,6 +58,20 @@ Template.Spinbox.events({
   },
   "keyup input":function(event,template){
     changeSize(event.currentTarget);
+  },
+  'change input':function(event,template){
+    let input = template.$('input')[0]
+    let value = input.value;
+    if(value){
+        input.value = val(value,this.range);
+      changeSize(input)
+    }else{
+      if(this.range){
+        input.value = this.range.min
+      }else{
+        input.value = 0;
+      }
+    }
   }
 });
 
@@ -69,4 +84,30 @@ function changeSize(input){
   input.size = input.value.toString().length
   else
   input.size = 1;
+}
+
+function position(value,range){
+  if(range){
+    if(value > range.max){
+      return 1;
+    }
+    if(value >= range.min && value <= range.max){
+      return 0;
+    }
+    return -1
+  }
+  return true
+}
+
+function val(value,range){
+  let pos = position(value,range)
+  if(pos === true || pos === 0){
+    return value;
+  }
+  if(pos === 1){
+    return range.max
+  }
+  if(pos === -1){
+    return range.min
+  }
 }

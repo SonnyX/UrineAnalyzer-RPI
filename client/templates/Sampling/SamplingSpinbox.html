@@ -1,3 +1,5 @@
 <template name="SamplingSpinbox">
-  {{>Spinbox value=samplingFreq.value size="large" isOnlyNatural=true }}
+  {{#with samplingFreq}}
+    {{>Spinbox value=value size="large" isOnlyNatural=true range=range}}
+  {{/with}}
 </template>

@@ -9,7 +9,23 @@ Template.Slider.onRendered(function(){
     format: wNumb({decimals: 0})
   })
   .on('slide', function (ev, val) {
-    Meteor.call('Outputs.update',self._id,self.id,val,function(error,result){
+    if(!Settings.findOne({_id:'Services'}).isBusy){
+      Meteor.call('configureOutputs',self._id,self.id,val,function(error,result){
+        if(error){
+          Messages.newErrorMsg(error)
+          return;
+        }
+        if(result && result !== 'success'){
+          Messages.newErrorMsg(result);
+          //$(`[id='${self._id}'].slider`).val(self.start)
+          return;
+        }
+      });
+    }
+    Meteor.call('Outputs.update',self._id,self.id,val);
+  })
+  .on('change',function(ev,val){
+    Meteor.call('configureOutputs',self._id,self.id,val,function(error,result){
       if(error){
         Messages.newErrorMsg(error)
         return;
@@ -20,12 +36,5 @@ Template.Slider.onRendered(function(){
         return;
       }
     });
-  })
-  .on('change', function(ev,val){
-    if(typeof self.pin == 'number'){
-      //Meteor.call('setDutyCycle',{pin:self.pin,dutyCycle:val})
-    }else {
-      //Meteor.call('setValve',{valve:self.valve,value:val})
-    }
   })
 });

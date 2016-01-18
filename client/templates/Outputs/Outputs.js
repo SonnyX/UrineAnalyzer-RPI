@@ -27,7 +27,7 @@ Template.Outputs.helpers({
 Template.Outputs.onRendered(function(){
   let self = this;
   this.autorun(function(){
-     if(!Settings.findOne({_id:'ActionsLicense'}).released){
+     if(!Settings.findOne({_id:'Services'}).released){
        FlowRouter.go('/');
      }
   });

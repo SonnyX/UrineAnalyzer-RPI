@@ -21,6 +21,16 @@ Template.Main.onRendered(function(){
   this.autorun(function(){
      if(self.subscriptionsReady()){
        verifyPhBuffer();
+       if(Settings.findOne({_id:'Services'}).isBusy){
+         Meteor.setTimeout(function(){
+           Meteor.call('updateServices',function(error){
+             if(error){
+               Messages.newErrorMsg(error);
+               return
+             }
+           });
+         },100)
+       }
      }
   });
 })

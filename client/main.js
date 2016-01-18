@@ -43,7 +43,7 @@ Accounts.onEmailVerificationLink(function(token,done){
 })
 
 Template.registerHelper("buttonLicense", function (param) {
-  let license = Settings.findOne({_id:'ActionsLicense'}).released;
+  let license = Settings.findOne({_id:'Services'}).released;
   if(!license){
     return 'disabled';
   }else{

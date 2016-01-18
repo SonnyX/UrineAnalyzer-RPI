@@ -7,7 +7,7 @@ Template.UserItem.helpers({
     return 'Machine';
   },
   locker(){
-    let license = Settings.findOne({_id:'ActionsLicense'});
+    let license = Settings.findOne({_id:'Services'});
     if(license.released){
       return {released:license.released,locker:'unlock'};
     }
@@ -24,7 +24,7 @@ Template.UserItem.events({
     Meteor.call('verifyConnection',function(error,isRoot){
       if(error) throw error;
       if(isRoot){
-        Settings.update({_id:'ActionsLicense'},{$set:{released:!self.released}})
+        Settings.update({_id:'Services'},{$set:{released:!self.released}})
       }
     })
   }

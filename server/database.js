@@ -21,7 +21,7 @@ WebApp.connectHandlers.use('/database/backup',function(req,res,next){
 
 WebApp.connectHandlers.use('/database/restore',function(req,res,next){
   if(req.method ==='POST'){
-    if(!Settings.findOne({_id:'ActionsLicense'}).released){
+    if(!Settings.findOne({_id:'Services'}).released){
       return;
     }
     let file = fs.createWriteStream('./dump.tar');
