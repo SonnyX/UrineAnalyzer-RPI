@@ -1,6 +1,6 @@
 
 Accounts.onCreateUser(function(options,user){
-  if(/^[-._]|[^\w-.]|[-._]$/.exec(user.username)){
+  if(/^[-._]|[^\w-.\s]|[-._]$/.exec(user.username)){
     throw new Meteor.Error(402, "Invalid character on username");
   }
   if(options.connection && options.connection.clientAddress){

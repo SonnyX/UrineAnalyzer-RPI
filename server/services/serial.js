@@ -48,8 +48,8 @@ Serial = class Serial {
     this.onDisconnect = null
 
     this.port = null
-    this.pnpId = 'pci-Texas_Instruments_XDS110__02.02.04.02__with_CMSIS-DAP_00000000-if00'
-    //this.pnpId = 'usb-Texas_Instruments_XDS110__02.02.04.02__with_CMSIS-DAP_00000000-if00'
+    //this.pnpId = 'pci-Texas_Instruments_XDS110__02.02.04.02__with_CMSIS-DAP_00000000-if00'
+    this.pnpId = 'usb-Texas_Instruments_XDS110__02.02.04.02__with_CMSIS-DAP_00000000-if00'
     this.vendorId = '0x0x8086'
     this.baudrate = 115200
     this.serialHandle = null
@@ -85,8 +85,7 @@ Serial = class Serial {
         }
         else {
           ports = ports.filter((port) => {
-            //return (port.pnpId === this.pnpId)
-            return (port.manufacturer == 'Texas_Instruments')
+            return (port.pnpId === this.pnpId)
             //return (port.vendorId === this.vendorId)
           })
 

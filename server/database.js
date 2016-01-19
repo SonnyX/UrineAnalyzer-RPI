@@ -54,3 +54,18 @@ WebApp.connectHandlers.use('/database/restore',function(req,res,next){
       res.end()
     }
   })
+
+
+  cleanDatabase = function(){
+  	let currentTime = moment().subtract(1,'days').endOf('day').valueOf();
+  	let observe = Analysis.find({firstDate:{$lt:currentTime}}).observe({
+  		added:function(doc){
+  			Analysis.remove({_id:doc._id});
+  			Samples.remove({_id:{$regex:new RegExp(doc._id+'$'),$options:'m'}})
+  		}
+  	})
+  	Meteor.setInterval(function(){
+  		observe.stop();
+  		teste();
+  	}, 8.64e+7/*One Day in milliseconds*/)
+  }

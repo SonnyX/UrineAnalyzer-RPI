@@ -12,23 +12,24 @@ Template.SamplingButton.events({
   "click .button": function(event, template){
     let button = template.$(event.currentTarget);
     if(button.hasClass('positive')){
-      Meteor.call('startSamplingRandomData',function(error,result){
+      Meteor.call('newStartSampling',function(error,result){
+        console.log(error, result);
         if(error){
           Messages.newErrorMsg(error);
           return false;
         }
         //True(button)
-        Session.set("timeId",randomDataGenerator());
+        //ession.set("timeId",randomDataGenerator());
       })
     }
     else {
-      Meteor.call('stopSamplingRandomData',function(error,result){
+      Meteor.call('newStopSampling',function(error,result){
         if(error){
           Messages.newErrorMsg(error);
           return false;
         }
         //False(button)
-        Meteor.clearInterval(Session.get("timeId"))
+        //Meteor.clearInterval(Session.get("timeId"))
       })
     }
   }
