@@ -14,7 +14,7 @@ Template.Spinbox.events({
     let input = template.$('input')[0];
     let value = input.value
     if(!isNaN(value)){
-      input.value = val(++value,this.range);
+      input.value = teste(++value,this,'+');
       changeSize(input)
     }
   },
@@ -23,7 +23,7 @@ Template.Spinbox.events({
     let value = input.value;
     if(!isNaN(value)){
       if(!this.isOnlyNatural || value > 0 ){
-        input.value = val(--value,this.range);
+        input.value = teste(--value,this,'-');
       }
       changeSize(input)
     }
@@ -63,7 +63,7 @@ Template.Spinbox.events({
     let input = template.$('input')[0]
     let value = input.value;
     if(value){
-        input.value = val(value,this.range);
+        input.value = teste(value,this,'input')//val(value,this.range);
       changeSize(input)
     }else{
       if(this.range){
@@ -109,5 +109,35 @@ function val(value,range){
   }
   if(pos === -1){
     return range.min
+  }
+}
+
+
+function teste(value,{commonFactor,range},operation){
+  if(!commonFactor || isNaN(commonFactor)){
+    return val(value,range);
+  }
+  switch (operation) {
+    case '+':
+      while (commonFactor%value != 0) {
+        if(value >= range.max) {return val(value,range)}
+        value++;
+      }
+      return val(value,range)
+      break;
+    case '-':
+      while (commonFactor%value != 0) {
+        if(value <= range.min) {return val(value,range)}
+        value--;
+      }
+      return val(value,range)
+      break;
+    case 'input':
+      while(commonFactor%value != 0){
+        if(value <= range.min) {return val(value,range)}
+        value--;
+      }
+      return val(value,range)
+      break;
   }
 }
