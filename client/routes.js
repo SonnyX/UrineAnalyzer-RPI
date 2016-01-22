@@ -25,6 +25,13 @@ mainRoutes.route('/', {
 
 mainRoutes.route('/data/:id', {
   action: function(params,queryParams) {
+    Meteor.call('isValidRoute',params.id,function(error,result){
+      if(error){
+        Messages.newErrorMsg(error);
+        FlowRouter.go(FlowRouter.path("Main"));
+        return;
+      }
+    })
     BlazeLayout.render('Main', { content:'Data'});
   }
 });

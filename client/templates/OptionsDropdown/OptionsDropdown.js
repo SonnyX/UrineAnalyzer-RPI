@@ -1,6 +1,6 @@
 Template.OptionsDropdown.events({
   "click .item": function(event, template){
-    Options.update({_id:template.data.option._id}, {$set:{item:this.valueOf()}});
+    Meteor.call('settingsDropdownUpdate',template.data.option._id,this.valueOf())
   }
 });
 
@@ -12,7 +12,7 @@ Template.OptionsDropdown.onRendered(function(){
 
 Template.SettingsDropdown.events({
   "click .item": function(event, template){
-    Settings.update({_id:template.data.setting._id}, {$set:{item:this.valueOf()}});
+    Meteor.call('settingsDropdownUpdate',template.data.setting._id,this.valueOf())
   }
 });
 

@@ -6,7 +6,7 @@ Chart = {
       //chart.series[1].setData(ranges);
     }
   },
-  _getSamples(analysis,id){
+  _getSamples(analysis,id,date){
     let data = [];
     let counter = 0;
     Samples.find(
@@ -14,28 +14,37 @@ Chart = {
     ).map(function(samplesPerHour,i){
       samplesPerHour.samples.map(function(sample,i){
         if(counter++ <= this.counter){
-          data = data.concat({y:sample[id],temperature:sample.heater});
+          if(moment(date).isSame(moment(samplesPerHour.timeStamp).add(i*this.frequency,'milliseconds'),'day')){
+            data = data.concat({y:sample[id],temperature:sample.heater});
+          }
         }
       },analysis)
     });
     return data;
   },
-  addSeries(chart,analysis,id){
+  addSeries(chart,analysis,id,date){
+    let {firstDate,frequency,counter} = analysis
+    for (var i = 0; i <= counter; i++) {
+      if(moment(date).isSame((firstDate + (i * frequency)),'day')){
+        firstDate = firstDate + (i * frequency)
+        break;
+      }
+    }
     let self = this;
     if(!chart)
       throw Error('chart does not exist');
     chart.addSeries({
-      data:self._getSamples(analysis,id),
-      pointStart: analysis.firstDate + moment().utcOffset()*60*1000,
+      data:self._getSamples(analysis,id,date),
+      pointStart: firstDate + moment().utcOffset()*60*1000,
       pointInterval:analysis.frequency
     })
   },
-  setSeries(chart,analysis,id,i){
+  setSeries(chart,analysis,id,i,date){
     let self = this;
     if(!chart)
       throw Error('chart does not exist');
     if(i >= 0){
-      chart.series[i].setData(self._getSamples(analysis,id))
+      chart.series[i].setData(self._getSamples(analysis,id,date))
     }
   },
   cartesianize(items,y,x){

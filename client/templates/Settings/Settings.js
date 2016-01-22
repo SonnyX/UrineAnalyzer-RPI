@@ -15,6 +15,11 @@ Template.Settings.helpers({
   },
   samplingFreq(){
     return Options.findOne({_id:'SamplingFreq-'+Meteor.userId()});
+  },
+  localHost(){
+    if(!Meteor.userId()){
+      return true;
+    }
   }
 });
 
@@ -25,5 +30,21 @@ Template.Settings.events({
          Messages.newErrorMsg(error);
        }
      });
+  },
+  "click #calibrateBtn":function(event){
+    event.preventDefault();
+    Meteor.call('execOnServer','bundle/cal_ts.sh',function(error,result){
+      if(error){
+        Messages.newErrorMsg(error);
+        return
+      }
+      Messages.insert({
+        msg:result,
+        options:{
+          closeBtn:true,
+          type:'info'
+        }
+      })
+    })
   }
 });

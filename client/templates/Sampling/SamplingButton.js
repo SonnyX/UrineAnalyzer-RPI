@@ -12,17 +12,17 @@ Template.SamplingButton.events({
   "click .button": function(event, template){
     let button = template.$(event.currentTarget);
     if(button.hasClass('positive')){
-      Meteor.call('newStartSampling',function(error,result){
+      Meteor.call('startSampling',function(error,result){
         if(error){
           Messages.newErrorMsg(error);
           return false;
         }
         //True(button)
-        //ession.set("timeId",randomDataGenerator());
+        //Session.set("timeId",randomDataGenerator());
       })
     }
     else {
-      Meteor.call('newStopSampling',function(error,result){
+      Meteor.call('stopSampling',function(error,result){
         if(error){
           Messages.newErrorMsg(error);
           return false;

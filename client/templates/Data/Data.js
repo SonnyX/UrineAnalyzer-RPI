@@ -29,16 +29,22 @@ Template.Data.onRendered(function () {
           chart.series[0].remove(true);
         currentDate = moment(date)
       }
-      let analysis = Analysis.find(
+      let analysis2 = Analysis.find(
         {firstDate:{$gte:date.getTime(),$lt:moment(date).add(1,'days').valueOf()}},
         {sort:{firstDate:1}}
       ).fetch();
+      let analysis = []
+      Analysis.find({}).map(function(a){
+        if(moment(a.firstDate).add(a.counter*a.frequency,'milliseconds').isAfter(date)){
+          analysis.push(a);
+        }
+      })
       for (let i = 0; i < analysis.length; i++) {
         if (chart.series.length <= i){
-          Chart.addSeries(chart,analysis[i],id)
+          Chart.addSeries(chart,analysis[i],id,date)
         }
         if(chart.series[i].data.length < analysis[i].counter+1 || currentId != id){
-          Chart.setSeries(chart,analysis[i],id,i);
+          Chart.setSeries(chart,analysis[i],id,i,date);
         }
       }
       currentId = id;

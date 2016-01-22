@@ -1,4 +1,4 @@
-<template name="Outputs">
+<!--template name="Outputs">
     <div class="ui vertical inverted fluid accordion menu">
       {{#each items}}
       <div class="item">
@@ -31,4 +31,49 @@
       </div>
       {{/each}}
     </div>
+</template-->
+
+
+<template name="Outputs">
+  <div class="ui grid">
+  <div class="three wide column">
+    <div class="ui inverted vertical compact huge menu">
+      {{#each items}}
+        <a class="item {{#if active}}active{{/if}}" style="text-align:center;">
+          {{_id}}
+        </a>
+        <div class="{{_id}} ui buttons">
+          <div id="automaticButton" class="ui {{automaticButton}} large button">
+            Auto
+          </div>
+          <div id="manualButton" class="ui {{manualButton}} large button">
+            Manual
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+  <div class="one wide column"></div>
+  <div class="eleven wide column">
+    <div class="ui inverted segment">
+      {{#each items}}
+        {{#if active}}
+          <div id="{{_id}}" class="content">
+            <div class="ui relaxed grid center aligned">
+              {{# each outputs}}
+              <div class="eight wide column">
+                <div class="ui clearing inverted segment" style="padding:0;">
+                  <h1 class="ui left floated inverted header">{{_id}}</h1>
+                  <h1 class="ui right floated inverted header">{{percentage}}</h1>
+                </div>
+                {{> Slider this}}
+              </div>
+              {{/each}}
+            </div>
+          </div>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</div>
 </template>

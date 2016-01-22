@@ -1,0 +1,77 @@
+<template name="Settings">
+  <div class="ui center aligned container">
+
+    <div class="ui relaxed grid center aligned">
+
+      <div class="eight wide column">
+        <h2 class="ui header inverted">
+          <div class="content">
+            <div class="file">
+              <a download="samples.csv" href="/database/samples/csv?download=true" class="ui huge button" target="_parent">
+                CSV
+              </a>
+            </div>
+          </div>
+        </h2>
+
+        <h2 class="ui header inverted">
+          <div class="content">
+            <div id="cleanSamples" class="ui {{buttonLicense}} huge button">
+              Clean Samples
+            </div>
+          </div>
+        </h2>
+
+        <h2 class="ui header inverted">
+          <div class="content">
+            {{>BackupBtn}}
+          </div>
+        </h2>
+
+        <h2 class="ui header inverted">
+          <div class="content">
+            {{>RestoreBtn}}
+          </div>
+        </h2>
+
+        {{#if localHost}}
+        <h2 class="ui header inverted">
+          <button id="calibrateBtn" class="ui huge button">Calibrate screen</button>
+        </h2>
+        {{/if}}
+
+      </div>
+      <div class="eight wide column">
+        <h2 class="ui header inverted">
+          <div class="content">
+            Showing Samples from
+            {{>DateTimePicker Options = "SamplesOptions"}}
+          </div>
+        </h2>
+
+        <h2 class="ui header inverted">
+          <div class="content">
+            Last time the pH buffer was changed
+            {{> DateTimePicker Settings = "PhBuffer"}}
+          </div>
+        </h2>
+
+        <h2 class="ui header inverted">
+          <div class="content">
+            Collecting samples every
+            {{>SamplingSpinbox}}
+            {{>OptionsDropdown option=samplingFreq}}
+          </div>
+        </h2>
+
+        <h2 class="ui header inverted">
+          <div class="content">
+            Calibrating sensors every
+            {{>SettingsDropdown setting=calibrationOptions}}
+            minutes
+          </div>
+        </h2>
+      </div>
+    </div>
+  </div>
+</template>

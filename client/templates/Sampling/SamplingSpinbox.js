@@ -6,16 +6,12 @@ Template.SamplingSpinbox.helpers({
 
 Template.SamplingSpinbox.events({
   "change input": function(event, template){
-    if(this.value != event.target.value)
-      Options.update({_id:'SamplingFreq-'+Meteor.userId()}, {$set:{
-        value:parseInt(event.target.value) //milliseconds conversion
-      }
-    });
+    if(this.value != event.target.value){
+      Meteor.call('samplingSpinboxUpdate',parseInt(event.target.value));
+    }
   },
   "click #upButton, click #downButton":function(event,template){
     let value = template.$('input')[0].value;
-    Options.update({_id:'SamplingFreq-'+Meteor.userId()}, {$set:{
-      value:parseInt(value)
-    }});
+    Meteor.call('samplingSpinboxUpdate',parseInt(value));
   }
 });

@@ -1,7 +1,7 @@
 Template.Outputs.onCreated(function(){
   let self = this;
   this.autorun(function(){
-    self.subscribe("outputsOriginal");
+    self.subscribe("outputs");
   });
 })
 
@@ -58,5 +58,8 @@ Template.Outputs.events({
         }
       })
     }
+  },
+  "click .menu .item":function(event,template){
+    Meteor.call('toggleOutput',this);
   }
 });
