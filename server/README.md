@@ -23,6 +23,9 @@
   In this project this is used to transfer database information from server to client.
   
 ## [Database functionalities](./database)
+  - [backup](./database/backup.js)
+    -Here you'll find the code for the backup action of the database. Basically, this action is invoked by an HTTP Get method.
+    and it returns
   
   
   [pubsub]:http://docs.meteor.com/#/basic/pubsub
