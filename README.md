@@ -38,7 +38,7 @@
   >
     Here you'll find the collections declaration that are utilized by both server and client side applications.
   
-[server]:(./server)
-[lib]:(./lib)
-[clien]:(./client)
+[server]:./server
+[lib]:./lib
+[client]:./client
 [database]:(./lib/database)
