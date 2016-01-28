@@ -1,8 +1,8 @@
 # Urine Analyzer
-  - [Server side](./server/README.md)
-  - [Meteor Methods](./lib/README.md)
-  - [Client side](./client/README.md)
-  - [Database](./lib/database/README.md)
+  - [Server side](./server)
+  - [Meteor Methods](./lib)
+  - [Client side](./client)
+  - [Database](./lib/database)
 
 ## Summary
   This is the **_Urine Analyzer_** project repository. 
