@@ -3,7 +3,7 @@
   - [Publications](#publications)
   - [Database functionalities](#database-functionalities)
 
-# [User Management] (./accounts.js)
+## [User Management] (./accounts.js)
   The User Management is mainly done internally by [**Meteor _Accounts_ Api**][acc].
   
   The only verification that we do before passing the whole administration to the Accounts library is done when creating a new user,
@@ -17,12 +17,12 @@
   We also have some templates for the E-mail sending system (which is not yet implemented, but yes, we got the template already!) in case
   of password lost and other stuffs and some configurations that is given from the Meteor [**_Accounts_ Api**][acc].
   
-# [Publications](./publication.js)
+## [Publications](./publication.js)
   Meteor-like applications are provided with Meteor [**_Publish and Subscribe_**][pubsub] documentation.
   Basically the Server "publishes" for the clients a given amount of data, based on what the client has requested in a subscription.
   In this project this is used to transfer database information from server to client.
   
-# [Database functionalities](./database)
+## [Database functionalities](./database)
   
   
   [pubsub]:http://docs.meteor.com/#/basic/pubsub
