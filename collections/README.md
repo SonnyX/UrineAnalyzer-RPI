@@ -53,3 +53,22 @@
 
 ## Outputs
   this collection represents the pumps, valves and heaters that there is on the declaration of the MSP.
+
+## Samples
+  >
+    The name sample is actually wrong. conceptually speaking the most apropriate name should be 'SamplesPerHour', but... too big...
+  
+  This guy represents a group of data collected in one single hour directly from the MSP by the StartSampling
+  [Method](../lib/methods.js) command.
+  
+  A sample element should contain:
+  - An ID: formed by  `currentTimein('DDMMYYYYHHmmssZZ') + '#' + _id of the analysis that generated this sample`,
+  - A timeStamp: indicating the time in  milliseconds of the first sample in this element
+  - An array: containing all the samples in the hour `[sample1,sample2,sample3,sample4]`
+  
+## Settings
+  this collection follows the same principles of the Options collection. Is a bunch of information. The only diference is that this     one is not exclusive for each user. This one is universal. what you put here, every user can see.
+  
+  Here we store data from icons that are being rendered by the menu items to the current state of the services.
+  If you want to implement something new and don't know where to put it. This is the right place.
+
