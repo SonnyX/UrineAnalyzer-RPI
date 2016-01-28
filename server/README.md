@@ -23,10 +23,12 @@
   In this project this is used to transfer database information from server to client.
   
 ## [Database functionalities](./database)
-  - [backup](./database/backup.js)
+  - [**backup**](./database/backup.js)
     - You'll find the code for the backup of the database. Basically this is invoked by an HTTP Get method and it returns via the response a stream containing a .tar file with the backup of all the collections. We use the npm package [mongodb-backup](https://github.com/hex7c0/mongodb-backup) to create the backup.
-  - [restore](./database/restore.js)
+  - [**restore**](./database/restore.js)
     - You'll find the code for the restoration of the database. Basically this is invoked by an HTTP Post method and receives via the request a .tar file with the backup of all the collections to be restored. We use the npm package [mongodb-restore](https://github.com/hex7c0/mongodb-restore) to do the restoration.
+  - [csv](./database/csv.js)
+    - You'll find the code for the creation of a .csv file with all the information of the samples in the database. this file basically invoke DbToCSV from [methods](../lib/methods.js) and then pass it to the client via an HTTP Get method.
   
   
   [pubsub]:http://docs.meteor.com/#/basic/pubsub
