@@ -1,6 +1,4 @@
 # Server side application
-
-#Index
   - [User Management](#user-management)
   - [Publications](./publication.js)
   - [Database functionalities](#database-functionalities)
