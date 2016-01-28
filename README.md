@@ -41,4 +41,4 @@
 [server]:./server
 [lib]:./lib
 [client]:./client
-[database]:(./lib/database)
+[database]:./lib/database
