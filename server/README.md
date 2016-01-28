@@ -32,9 +32,11 @@
     - You'll find the code for the creation of a .csv file with all the information of the samples in the database. this file basically invoke DbToCSV from [methods](../lib/methods.js) and then pass it to the client via an HTTP Get method.
 
 ## [Services](./services)
-  Here's where the magic happens!
+  Here's where the magic happens! The communication between the server application and the MSP controller. 
   
-  The communication between the server application and the MSP controller is basically declared here.
+  You'll find here the possible commands to contact the MSP controller and all the files that declare the connection.
+  >
+    Have in mind for future changes that there's an initialization method that must be invoked in the [server startup](./server.js) to call everything inside services. Do not forget to call this method.
   
   
   [pubsub]:http://docs.meteor.com/#/basic/pubsub
