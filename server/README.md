@@ -2,7 +2,7 @@
   - [User Management](#user-management)
   - [Publications](#publications)
   - [Database features](#database-features)
-  - [Services](#services)
+  - [MSP Connection](#services)
 
 ## [User Management] (./accounts.js)
   The User Management is mainly done internally by [**Meteor _Accounts_ Api**][acc].
