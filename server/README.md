@@ -1,7 +1,7 @@
 # Server side application
 
 #Index
-  - [User Management](#user)
+  - [User Management](#user-management)
   - [Link-name2](#Header2)
 
 
@@ -61,6 +61,6 @@ aa
 
 
 
-# User
-  - teste
-  - teste
+# [User Management] (./accounts.js)
+  >
+    The user collection is a Meteor collection
