@@ -10,6 +10,8 @@
   Here you'll find the "Meteor" like files that were used to develop both Client and Server side applications
   as well as the files utilized to archtect the Database ideas.
   
+  [**_Meteor docs_**](http://docs.meteor.com/#/basic/)
+  
 ## Goals
   This repository is dedicated to the development of the **_Urine Analyzer_** project
   
