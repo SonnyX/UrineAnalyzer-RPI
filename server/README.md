@@ -20,7 +20,9 @@
 # [Publications](./publication.js)
   Meteor-like applications are provided with Meteor [**_Publish and Subscribe_**][pubsub] documentation.
   Basically the Server "publishes" for the clients a given amount of data, based on what the client has requested in a subscription.
-  Normally this is used to transfer database information from server to client.
+  In this project this is used to transfer database information from server to client.
+  
+# [Database functionalities](./database)
   
   
   [pubsub]:http://docs.meteor.com/#/basic/pubsub
