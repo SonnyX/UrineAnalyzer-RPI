@@ -33,10 +33,10 @@
 
 ## [Services](./services)
   Here's where the magic happens! The communication between the server application and the MSP controller. 
-  
   You'll find here the possible commands to contact the MSP controller and all the files that declare the connection.
   >
-    Have in mind for future changes that there's an initialization method that must be invoked in the [server startup](./server.js) to call everything inside services. Do not forget to call this method.
+    Have in mind for future changes that there's an initialization method that must be invoked in the server startup
+    to call everything inside services. Do not forget to call this method somewhere around the startup.
   
   
   [pubsub]:http://docs.meteor.com/#/basic/pubsub
