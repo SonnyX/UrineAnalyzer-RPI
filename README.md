@@ -1,5 +1,4 @@
 # Urine Analyzer
-## Index
   - [Server side](./server/README.md)
   - [Meteor Methods](./lib/README.md)
   - [Client side](./client/README.md)
