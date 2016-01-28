@@ -40,8 +40,15 @@
 ## Options
   This collection represents special Options exclusive for each user. For example, the frequency of sampling,
   or the current date presenting on the graphics.
+  
+  An options element may contain whatever is necessary for a option implementation, as long as it has an _id in the following format:
+  
+  `_id:'name of the option' + '-' + Meteor.userId();`
+  
+  Basically this indicates that the option _'SamplesFrequency-aHakladm124mad'_ is an option from the user with the id _aHakladm124mad_
+  which indicates the _SamplesFrequency_.
   >
-    For future implementation it'd be nice to have this collection elimintade and then the internal options should be included
+    For future implementation it'd be nice to have this collection eliminated and then the internal options should be included
     inside the users profile from the Meteor users collection.
 
 ## Outputs
