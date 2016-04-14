@@ -114,32 +114,23 @@ Services.msp.methods.map = [
       let result = {
         ph: {
           raw: packet.readUInt16BE(0),
-          voltage: packet.readUInt16BE(0)*3.3/16384.0
         },
         na: {
           raw: packet.readUInt16BE(2),
-          voltage: packet.readUInt16BE(2)*3.3/16384.0
         },
         cl: {
           raw: packet.readUInt16BE(4),
-          voltage: packet.readUInt16BE(4)*3.3/16384.0
         },
         k: {
           raw: packet.readUInt16BE(6),
-          voltage: packet.readUInt16BE(6)*3.3/16384.0
         },
         conductivity: {
           raw: packet.readUInt16BE(8),
-          voltage: packet.readUInt16BE(8)*3.3/16384.0
         },
         preheater: {
-          raw: packet.readUInt16BE(10),
-          voltage: packet.readUInt16BE(10)*3.3/16384.0,
           temperature: 0.0037007729*packet.readUInt16BE(10) + 11.5201522894
         },
         heater: {
-          raw: packet.readUInt16BE(12),
-          voltage: packet.readUInt16BE(12)*3.3/16384.0,
           temperature: 0.0037007729*packet.readUInt16BE(12) + 10.2201522894
         },
         sd1: packet.readUInt16BE(14),

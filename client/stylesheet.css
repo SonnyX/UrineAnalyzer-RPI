@@ -16,7 +16,7 @@ html, body {
 }
 
 #gambiarra {
-  height:3.572em;
+  height:5em;
 }
  .segment {
    /*height: 100% !important;*/
@@ -41,10 +41,6 @@ html, body {
 
 .ui.form {
   padding: 4em;
-}
-
-.column>*{
-  height: 100% !important;
 }
 
 .bottom.menu{

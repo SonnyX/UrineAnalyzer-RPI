@@ -1,5 +1,8 @@
 <template name="ActionsPopUp">
   <div id="ActionsPopUp" class="ui flowing popup transition hidden">
-    {{> SamplingButton}}
+    <div class="ui huge buttons" style="flex-direction:column;">
+      {{> SamplingButton}}
+      {{> CalibrationButton}}
+    </div>
   </div>
 </template>

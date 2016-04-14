@@ -18,6 +18,13 @@ function parser(emitter, data) {
 
   let startByte = buffer.indexOf(0x21)
   while (startByte != -1) {
+    /*
+     * Make sure that the startByte is received before trying to read it.
+     */
+    if (startByte + 2 > buffer.length) {
+      buffer = buffer.slice(startByte)
+      return
+    }
     let payloadSize = buffer.readUInt8(startByte + 1)
     let payloadStart = startByte + 2
     let payloadEnd = payloadStart + payloadSize
