@@ -1,0 +1,23 @@
+/* 1 */
+{
+    "_id" : "DbRestorationMsg",
+    "message" : "Restoration complete",
+    "closeBtn" : true,
+    "type" : "info",
+    "active" : false
+}
+
+/* 2 */
+{
+    "_id" : "PhBufferMsg",
+    "message" : "Time to change the pH buffer",
+    "closeBtn" : false,
+    "type" : "warning",
+    "extraBtn" : {
+        "callback" : {
+            "name" : "updatePhBufferDate"
+        },
+        "text" : "Done"
+    },
+    "active" : false
+}

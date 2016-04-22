@@ -5,7 +5,7 @@ Services.msp.methods.serialize = function (method, args, buffer, offset) {
     return service.serialize(args, buffer, offset)
   }
   catch (error) {
-    throw new Error(`Msp methods serialize throwed: ${error}`)
+    throw new Error("Msp methods serialize throwed: " + error)
   }
 }
 
@@ -13,13 +13,11 @@ Services.msp.methods.deserialize = function (id, packet) {
   try {
     let service = Services.utils.find(Services.msp.methods.map, 'id', id)
 
-    if (typeof(service.deserialize) !== 'undefined') {
-      return service.deserialize(packet)
-    }
+    if (typeof(service.deserialize) !== 'undefined') return service.deserialize(packet)
     return { }
   }
   catch (error) {
-    throw new Error(`Msp methods deserialize throwed: ${error}`)
+    throw new Error("Msp methods serialize throwed: " + error)
   }
 }
 
@@ -27,9 +25,7 @@ function validateArray(args) {
   if (!args) throw `@${this.method} - args undefined`
 
   args.forEach((obj) => {
-    if (this.validIds.indexOf(obj.id) == -1) {
-      throw `@${this.method} - invalid id: ${obj.id}`
-    }
+    if (this.validIds.indexOf(obj.id) == -1) throw"@"+this.method+" - invalid id: "+ obj.id
   })
 }
 
@@ -85,15 +81,14 @@ Services.msp.methods.map = [
     id: 0x03,
     method: 'selectSensor',
     validateArgs(args) {
-      if (this.validIds.indexOf(args.id) == -1)
-        throw `@${this.method} - invalid sensor id: ${args.id}`
+      if (this.validIds.indexOf(args.id) == -1) throw `@${this.method} - invalid sensor id: ${args.id}`
     },
     validIds: [
       0, // SENSOR_PH
       1, // SENSOR_NA
       2, // SENSOR_CL
       3, // SENSOR_K
-      4  // SENSOR_CONDUCTIVIT
+      4  // SENSOR_CONDUCTIVITY
     ],
     serialize(args, buffer, offset) {
       buffer.writeUInt8(this.id, offset)
@@ -112,27 +107,13 @@ Services.msp.methods.map = [
     },
     deserialize(packet) {
       let result = {
-        ph: {
-          raw: packet.readUInt16BE(0),
-        },
-        na: {
-          raw: packet.readUInt16BE(2),
-        },
-        cl: {
-          raw: packet.readUInt16BE(4),
-        },
-        k: {
-          raw: packet.readUInt16BE(6),
-        },
-        conductivity: {
-          raw: packet.readUInt16BE(8),
-        },
-        preheater: {
-          temperature: 0.0037007729*packet.readUInt16BE(10) + 11.5201522894
-        },
-        heater: {
-          temperature: 0.0037007729*packet.readUInt16BE(12) + 10.2201522894
-        },
+        ph: packet.readUInt16BE(0),
+        na: packet.readUInt16BE(2),
+        cl: packet.readUInt16BE(4),
+        k: packet.readUInt16BE(6),
+        conductivity: packet.readUInt16BE(8),
+        preheater: 0.0037007729*packet.readUInt16BE(10) + 11.5201522894,
+        heater: 0.0037007729*packet.readUInt16BE(12) + 10.2201522894,
         sd1: packet.readUInt16BE(14),
         sd2: packet.readUInt16BE(16),
         timestamp: packet.readUInt32BE(18),
@@ -220,9 +201,11 @@ Services.msp.methods.map = [
   {
     id: 0x13,
     method: 'configureSDLeds',
-    validateArgs() {
-
-    },
+    validateArgs: validateArray,
+    validIds: [
+      0, // SD1
+      1  // SD2
+    ],
     serialize(args, buffer, offset) {
       buffer.writeUInt8(this.id)
       return 1

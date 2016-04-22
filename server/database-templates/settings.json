@@ -1,0 +1,166 @@
+/* 1 */
+{
+    "_id" : "Calibration",
+    "item" : 30,
+    "items" : [ 
+        30,
+        60
+    ]
+}
+
+/* 2 */
+{
+    "_id" : "Data",
+    "data" : [ 
+        {
+            "_id" : "ph",
+            "label" : "Acidity",
+            "measure" : "pH"
+        }, 
+        {
+            "_id" : "na",
+            "label" : "Na",
+            "measure" : "mmol/L"
+        }, 
+        {
+            "_id" : "k",
+            "label" : "K",
+            "measure" : "mmol/L"
+        }, 
+        {
+            "_id" : "cl",
+            "label" : "Cl",
+            "measure" : "mmol/L"
+        }, 
+        {
+            "_id" : "volume",
+            "label" : "Vol",
+            "measure" : "mL"
+        }, 
+        {
+            "_id" : "conductivity",
+            "label" : "Con",
+            "measure" : "V"
+        }, 
+        {
+            "_id" : "heater"
+        }
+    ]
+}
+
+/* 3 */
+{
+    "_id" : "DataTopMenuItems",
+    "leftItems" : [],
+    "rightItems" : [ 
+        {
+            "template" : "DateTimePicker",
+            "data" : {
+                "Options" : "SamplesOptions"
+            }
+        }
+    ]
+}
+
+/* 4 */
+{
+    "_id" : "MSPState",
+    "isActive" : false
+}
+
+/* 5 */
+{
+    "_id" : "PhBuffer",
+    "date" : ISODate("2016-04-04T22:00:00.000Z")
+}
+
+/* 6 */
+{
+    "_id" : "SamplingState",
+    "value" : true
+}
+
+/* 7 */
+{
+    "_id" : "Services",
+    "released" : true,
+    "isBusy" : false
+}
+
+/* 8 */
+{
+    "_id" : "SideMenuItems",
+    "items" : [ 
+        {
+            "template" : "MenuItem",
+            "data" : {
+                "label" : "Overview",
+                "icon" : "grid layout",
+                "href" : "/"
+            }
+        }, 
+        {
+            "template" : "MenuItem",
+            "data" : {
+                "label" : "Data",
+                "icon" : "doctor",
+                "items" : [ 
+                    {
+                        "template" : "DataItems"
+                    }
+                ]
+            }
+        }, 
+        {
+            "template" : "LicenseMenuItem",
+            "data" : {
+                "label" : "Outputs",
+                "icon" : "sitemap",
+                "href" : "/outputs"
+            }
+        }, 
+        {
+            "template" : "MenuItem",
+            "data" : {
+                "label" : "Settings",
+                "icon" : "settings",
+                "href" : "/settings"
+            }
+        }
+    ]
+}
+
+/* 9 */
+{
+    "_id" : "TopMenuItems",
+    "leftItems" : [ 
+        {
+            "template" : "MenuItem",
+            "data" : {
+                "label" : "Menu",
+                "icon" : "grid layout"
+            }
+        }, 
+        {
+            "template" : "MenuItem",
+            "data" : {
+                "label" : "Actions",
+                "icon" : "options"
+            }
+        }
+    ],
+    "rightItems" : [ 
+        {
+            "data" : {
+                "temperature" : {
+                    "preheater" : "37.0",
+                    "heater" : "37.1"
+                }
+            },
+            "template" : "MenuTemp"
+        }, 
+        {
+            "template" : "UserItem"
+        }
+    ]
+}

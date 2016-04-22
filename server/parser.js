@@ -15,6 +15,14 @@ Parser = function parser(emitter, data) {
 
 	let startByte = buffer.indexOf(33)
 	while (startByte != -1) {
+	  /*
+	   * If startByte + 2 is greater than the length of the packet, 
+	   * it did not arrive yet, slice the buffer and return
+	   */
+	  if (startByte + 2 > buffer.length) {
+			buffer = buffer.slice(startByte)
+			return
+		}
 		let payloadSize = buffer.readUInt8(startByte + 1)
 		let payloadStart = startByte + 2
 		let payloadEnd = payloadStart + payloadSize

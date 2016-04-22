@@ -62,7 +62,7 @@ Serial = class Serial {
     Meteor.setInterval(() => {
       if (!this.isConnected()) {
         if (this.serialHandle != null) {
-          console.log(`>> Serial: MSP432 connection lost!`)
+          console.log('>> Serial: MSP432 connection lost!')
 
           if (this.onDisconnect != null) {
             this.onDisconnect()
@@ -78,7 +78,7 @@ Serial = class Serial {
 
   connect() {
     this.port = null
-    console.log(`>> Serial: Searching for MSP432...`)
+    console.log('>> Serial: Searching for MSP432...')
 
     try {
       serialport.list((error, ports) => {
@@ -93,11 +93,11 @@ Serial = class Serial {
           })
 
           if (ports.length === 0) {
-            console.log(`>> Serial: Unable to find MSP432!`)
+            console.log('>> Serial: Unable to find MSP432!')
           }
           else {
             this.port = ports[0].comName
-            console.log(`>> Serial: MSP432 found at ${this.port}`)
+            console.log('>> Serial: MSP432 found at ' + this.port)
 
             this.serialHandle = new SerialPort(this.port, {
               baudrate: this.baudrate,
@@ -115,20 +115,29 @@ Serial = class Serial {
   }
 
   open() {
-    console.log(`>> Trying to open ${this.port}`)
+    console.log(">> Trying to open " + this.port)
 
     this.serialHandle.open(error => {
       if (!error) {
-        console.log(`>> Serial: ${this.port} connection successful`)
+        console.log('>> Serial: ' + this.port + ' connection successful')
         if (typeof(this.onOpen) !== 'undefined') {
           this.onOpen()
         }
       }
       else {
-        console.log(`>> Failed to open ${this.port}`)
+        console.log('>> Failed to open ' + this.port)
         this.serialHandle = null
       }
     })
+  }
+  
+  onOpen() { 
+  	// If the meteor server restarts for some reason, then make sure to continue sampling if it was enabled before.
+    // Might make an issue if the msp did actually disconnect.
+	  if (Settings.findOne({ _id: 'SamplingState' }).value && Settings.findOne({ _id: 'Services' }).released) {
+	    Meteor.call('stopSampling');
+		  Meteor.call('startSampling');
+	  }
   }
 
   on(type, callback) {
@@ -152,7 +161,7 @@ Serial = class Serial {
       this.serialHandle.write(data)
     }
     else {
-      throw new Error(`Serial write error: MSP is not connected!`)
+      throw new Error("Serial write error: MSP is not connected!")
     }
   }
 }

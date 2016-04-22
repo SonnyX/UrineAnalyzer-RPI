@@ -8,29 +8,30 @@ meteor-base             # Packages every Meteor app needs to have
 mobile-experience       # Packages for a great mobile UX
 mongo                   # The database Meteor supports right now
 blaze-html-templates    # Compile .html files into Meteor Blaze views
-session                 # Client-side reactive dictionary for your app
+reactive-var            # Reactive variable for tracker
 jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
 
-standard-minifiers      # JS/CSS minifiers run for production mode
+standard-minifier-css   # CSS minifier run for production mode
+standard-minifier-js    # JS minifier run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
-kadira:blaze-layout
-kadira:flow-router
-maazalik:highcharts
+accounts-password       # Required for mongo users databas
 semantic:ui
-flemay:less-autoprefixer
 semantic:ui-css
+kadira:blaze-layout     # Goes with the router
+kadira:flow-router      # Routing the client side things
+maazalik:highcharts     # HighCharts
+msavin:mongol           # mongol is a debugging app, open in browser with control + M
+harrison:papa-parse     # probably for the database dump to csv
+momentjs:moment         # Something about added time functionality
+
+#hand-added, not sure if needed
+session
+flemay:less-autoprefixer
 matb33:collection-hooks
 sarasate:semantic-ui-datetimepicker
-reactive-var
-momentjs:moment
-msavin:mongol
 benmgreene:moment-range
-
-
 rcy:nouislider
-harrison:papa-parse
-accounts-password
 meteorhacks:aggregate
