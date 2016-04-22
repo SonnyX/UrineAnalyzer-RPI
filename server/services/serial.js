@@ -130,15 +130,6 @@ Serial = class Serial {
       }
     })
   }
-  
-  onOpen() { 
-  	// If the meteor server restarts for some reason, then make sure to continue sampling if it was enabled before.
-    // Might make an issue if the msp did actually disconnect.
-	  if (Settings.findOne({ _id: 'SamplingState' }).value && Settings.findOne({ _id: 'Services' }).released) {
-	    Meteor.call('stopSampling');
-		  Meteor.call('startSampling');
-	  }
-  }
 
   on(type, callback) {
     if (type == 'disconnect') {
