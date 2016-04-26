@@ -42,8 +42,7 @@ Template.Data.onRendered(function () {
       for (let i = 0; i < analysis.length; i++) {
         if (chart.series.length <= i){
           Chart.addSeries(chart,analysis[i],id,date)
-        }
-        if(chart.series[i].data.length < analysis[i].counter+1 || currentId != id){
+        } else if(chart.series[i].data.length < analysis[i].counter+1 || currentId != id){
           Chart.setSeries(chart,analysis[i],id,i,date);
         }
       }

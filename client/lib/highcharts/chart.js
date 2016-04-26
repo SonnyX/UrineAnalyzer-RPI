@@ -9,9 +9,7 @@ Chart = {
   _getSamples(analysis,id,date){
     let data = [];
     let counter = 0;
-    Samples.find(
-      {_id:{$regex:new RegExp(analysis._id+'$'),$options:'m'}}
-    ).map(function(samplesPerHour,i){
+    Samples.find( {_id:{$regex:new RegExp(analysis._id+'$'),$options:'m'}} ).map(function(samplesPerHour,i){
       samplesPerHour.samples.map(function(sample,i){
         if(counter++ <= this.counter){
           if(moment(date).isSame(moment(samplesPerHour.timeStamp).add(i*this.frequency,'milliseconds'),'day')){
@@ -20,6 +18,10 @@ Chart = {
         }
       },analysis)
     });
+    console.log("analysis: ");
+    console.log(analysis);
+    console.log("Data:");
+    console.log(data);
     return data;
   },
   addSeries(chart,analysis,id,date){
@@ -31,13 +33,14 @@ Chart = {
       }
     }
     let self = this;
-    if(!chart)
-      throw Error('chart does not exist');
+    if(!chart) throw Error('chart does not exist');
     chart.addSeries({
       data:self._getSamples(analysis,id,date),
       pointStart: firstDate + moment().utcOffset()*60*1000,
       pointInterval:analysis.frequency
     })
+    console.log("Series: ");
+    console.log(chart.series[0].data);
   },
   setSeries(chart,analysis,id,i,date){
     let self = this;
@@ -108,7 +111,8 @@ Chart = {
               this.chart.redraw();
             return false;
             }
-          }
+          },
+          turboThreshold:2000
         }
       },
       tooltip: {
@@ -117,7 +121,7 @@ Chart = {
         xDateFormat: '<b>%H:%M:%S</b>',
         pointFormat: '<span style="color:{point.color}">\u25CF</span>Value: <b>{point.y}</b><br/><p>Temperature: {point.temperature}°C</p>',
         //followPointer:true,
-        followTouchMove:true
+        followTouchMove:true,
       },
         series: []/*,
         series: [{
