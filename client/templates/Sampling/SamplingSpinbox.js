@@ -1,6 +1,6 @@
 Template.SamplingSpinbox.helpers({
   samplingFreq(){
-    return Options.findOne({_id:'SamplingFreq-'+Meteor.userId()})
+    return Settings.findOne({_id:'SamplingFreq'})
   }
 });
 

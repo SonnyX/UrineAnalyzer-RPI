@@ -4,7 +4,7 @@ Template.DateTimePicker.onCreated(function(){
     if(self.data.Settings){
       self.data._options = Settings.findOne({_id:self.data.Settings});
     }if(self.data.Options){
-      self.data._options = Options.findOne({_id:self.data.Options + '-' + Meteor.userId()})
+      self.data._options = Settings.findOne({_id:self.data.Options})
     }
   });
 })
@@ -13,7 +13,7 @@ Template.DateTimePicker.helpers({
     if(this.Settings){
       return moment(Settings.findOne({_id:this.Settings}).date).format('DD/MM/YYYY')
     }if(this.Options){
-      return moment(Options.findOne({_id:this.Options +'-'+Meteor.userId()}).date).format('DD/MM/YYYY')
+      return moment(Settings.findOne({_id:this.Options}).date).format('DD/MM/YYYY')
     }
   }
 });

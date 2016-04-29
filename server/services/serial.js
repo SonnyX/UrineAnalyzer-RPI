@@ -61,18 +61,18 @@ Serial = class Serial {
 
     Meteor.setInterval(() => {
       if (!this.isConnected()) {
+        console.log('>> Serial: MSP432 connection lost!')
         if (this.serialHandle != null) {
-          console.log('>> Serial: MSP432 connection lost!')
-
           if (this.onDisconnect != null) {
             this.onDisconnect()
           }
-
           this.serialHandle = null
         }
-
         this.connect()
-      }
+     } else if (!this.isResponding()) {
+       console.log('>> Serial: MSP432 stopped responding!');
+       this.connect()
+     }
     }, 3000)
   }
 
@@ -116,7 +116,6 @@ Serial = class Serial {
 
   open() {
     console.log(">> Trying to open " + this.port)
-
     this.serialHandle.open(error => {
       if (!error) {
         console.log('>> Serial: ' + this.port + ' connection successful')
@@ -125,7 +124,7 @@ Serial = class Serial {
         }
       }
       else {
-        console.log('>> Failed to open ' + this.port)
+        console.log('>> Failed to oserialHandlepen ' + this.port)
         this.serialHandle = null
       }
     })
@@ -144,6 +143,10 @@ Serial = class Serial {
     if ((this.serialHandle == null) || (!this.serialHandle.isOpen())) {
       return false
     }
+    return true
+  }
+  
+  isResponding() {
     return true
   }
 

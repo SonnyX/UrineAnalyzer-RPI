@@ -14,7 +14,7 @@ Template.Settings.helpers({
     return Settings.findOne({_id:'Calibration'});
   },
   samplingFreq(){
-    return Options.findOne({_id:'SamplingFreq-'+Meteor.userId()});
+    return Settings.findOne({_id:'SamplingFreq'});
   },
   localHost(){
     if(!Meteor.userId()){

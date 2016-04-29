@@ -4,7 +4,7 @@ Template.Data.onCreated(function () {
   let self = this;
   this.samplesOptions = new ReactiveVar();
   this.autorun(function(){
-    self.samplesOptions.set(Options.findOne({_id:'SamplesOptions-'+Meteor.userId()}));
+    self.samplesOptions.set(Settings.findOne({_id:'SamplesOptions'}));
   });
 });
 
@@ -42,7 +42,8 @@ Template.Data.onRendered(function () {
       for (let i = 0; i < analysis.length; i++) {
         if (chart.series.length <= i){
           Chart.addSeries(chart,analysis[i],id,date)
-        } else if(chart.series[i].data.length < analysis[i].counter+1 || currentId != id){
+        } 
+        if(chart.series[i].data.length < analysis[i].counter+1 || currentId != id){
           Chart.setSeries(chart,analysis[i],id,i,date);
         }
       }

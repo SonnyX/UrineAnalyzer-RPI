@@ -18,10 +18,6 @@ Chart = {
         }
       },analysis)
     });
-    console.log("analysis: ");
-    console.log(analysis);
-    console.log("Data:");
-    console.log(data);
     return data;
   },
   addSeries(chart,analysis,id,date){
@@ -39,8 +35,6 @@ Chart = {
       pointStart: firstDate + moment().utcOffset()*60*1000,
       pointInterval:analysis.frequency
     })
-    console.log("Series: ");
-    console.log(chart.series[0].data);
   },
   setSeries(chart,analysis,id,i,date){
     let self = this;
@@ -121,7 +115,7 @@ Chart = {
         xDateFormat: '<b>%H:%M:%S</b>',
         pointFormat: '<span style="color:{point.color}">\u25CF</span>Value: <b>{point.y}</b><br/><p>Temperature: {point.temperature}°C</p>',
         //followPointer:true,
-        followTouchMove:true,
+        followTouchMove:true
       },
         series: []/*,
         series: [{

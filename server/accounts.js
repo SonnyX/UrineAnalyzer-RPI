@@ -7,12 +7,6 @@ Accounts.onCreateUser(function(options,user){
     if(Meteor.userId() || options.connection.clientAddress =='127.0.0.1'){
       user._createdBy = Meteor.userId()|| '/';
       user.profile = options.profile || {};
-      Options.find(
-        {_id:{$regex:new RegExp('-' + Meteor.userId() + '$'),$options:'m'}}
-      ).map(function(option,i){
-        option._id =/^[^\-]*/.exec(option._id)+'-'+ user._id;
-        Options.insert(option);
-      })
       let creator = Meteor.users.findOne({_id:user._createdBy})
       if(creator){
         user.profile.creator = creator.username || creator.emails[0].address;
