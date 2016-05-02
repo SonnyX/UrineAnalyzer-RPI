@@ -1,3 +1,50 @@
+# Urine Analyzer
+  - [Server side][server]
+  - [Meteor Methods][lib]
+  - [Client side][client]
+  - [Database][database]
+
+## Summary
+  This is the **_Urine Analyzer_** project repository. 
+  
+  Here you'll find the "Meteor" like files that were used to develop both Client and Server side applications
+  as well as the files utilized to archtect the Database ideas.
+  
+  [**_Meteor docs_**](http://docs.meteor.com/#/basic/)
+  
+## Goals
+  This repository is dedicated to the development of the **_Urine Analyzer_** project
+  
+  and has as it's main goal to serve as reference for the constant development of the project despite
+  the changes in the development team.
+  
+## Architecture
+   This repository is divided in three major folders and one declaration folder: client, server, lib and collections.
+  
+  [**client**][client]
+  >
+    You'll find codes involving the design of the webpage itself.
+  
+  [**server**][server]
+  >
+    You'll find all the code that makes the contact between the server application and the MSP controller,
+    as well as the code utilized to publish the database to the client 
+    and the code to permit database backups and restoration.
+  
+  [**lib**][lib]
+  >
+    You'll find most of the links between client and server application in the methods.js file
+    and the Database's files inside the database folder
+  
+  [**collections**](./collections/collections.js)
+  >
+    Here you'll find the collections declaration that are utilized by both server and client side applications.
+  
+[server]:./server
+[lib]:./lib
+[client]:./client
+[database]:./lib/database
+
 # UrineAnalyzer RaspberryPi Side
 To execute locally, go into the folder and use: "meteor", you can then view the app in your browser on: http://localhost:3000
 To compile and send to the Raspberry Pi you may use:
@@ -21,7 +68,6 @@ cat << "EOF"
  \___/|_| |_|_||_\___| /_/ \_\_||_\__,_|_|\_, /__\___|_|     \_/ |_(_)__/
    We are currently booting up            |__/
 EOF
-echo $cat
 export HOME="/root"
 cd /root/piruzao/
 bundle="app.tar.gz"
@@ -39,10 +85,10 @@ if [ -f "$bundle" ]; then
   echo '>>> Removing '$bundle
   rm -rf $bundle
   echo '>>> Installing dependencies'
-  (cd bundle/programs/server && npm install && rm -R npm/npm-bcrypt/node_modules/bcrypt && npm install serialport underscore fs mongodb-backup mongodb-restore bcrypt)
+  (cd bundle/programs/server && npm install && rm -fR npm/node_modules/meteor/npm-bcrypt/node_modules/bcrypt/ && npm install serialport underscore fs mongodb-backup mongodb-restore bcrypt)
   echo '>>> Finished installing dependencies'
   echo '>>> Copying required files to bundle directory'
-  cat << "EOF"
+  cat  > bundle/index.js << "EOF"
 var app = require('app')
 var BrowserWindow = require('browser-window')
 app.on('ready',function(){
@@ -56,7 +102,7 @@ mainWindow.loadUrl('http://localhost:80/');
 mainWindow.setFullScreen(true);
 })
 EOF
-  echo $cat > bundle/index.js
+
   echo "xinit /usr/local/bin/xinput_calibrator --output-type xorg.conf.d --output-filename /usr/share/X11/xorg.conf.d/01-input.conf -- :1" > bundle/cal_ts.sh
   echo '>>> Finished update'
 fi
