@@ -3,7 +3,7 @@ Template.CalibrationButton.helpers({
   options(){
     let samplingState = Settings.findOne({_id:'SamplingState'});
     if(samplingState.value)
-      return {button:'negative',icon:'stop',color:'red',text:'Stop'};
+      return {button:'negative',icon:'stop',color:'grey',text:'Stop'};
     return {button:'positive',icon:'play',color:'green',text:'Start'};
   }
 });

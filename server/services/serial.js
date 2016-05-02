@@ -124,7 +124,7 @@ Serial = class Serial {
         }
       }
       else {
-        console.log('>> Failed to oserialHandlepen ' + this.port)
+        console.log('>> Failed to open ' + this.port)
         this.serialHandle = null
       }
     })

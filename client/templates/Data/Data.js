@@ -25,14 +25,9 @@ Template.Data.onRendered(function () {
     if(self.subscriptionsReady()){
       let {date} = self.samplesOptions.get()
       if(!currentDate.isSame(date)){
-        while(chart.series.length > 0)
-          chart.series[0].remove(true);
+        while(chart.series.length > 0) chart.series[0].remove(true);
         currentDate = moment(date)
       }
-      let analysis2 = Analysis.find(
-        {firstDate:{$gte:date.getTime(),$lt:moment(date).add(1,'days').valueOf()}},
-        {sort:{firstDate:1}}
-      ).fetch();
       let analysis = []
       Analysis.find({}).map(function(a){
         if(moment(a.firstDate).add(a.counter*a.frequency,'milliseconds').isAfter(date)){
@@ -41,9 +36,18 @@ Template.Data.onRendered(function () {
       })
       for (let i = 0; i < analysis.length; i++) {
         if (chart.series.length <= i){
-          Chart.addSeries(chart,analysis[i],id,date)
+          if(id!='all') Chart.addSeries(chart,analysis[i],id,date)
+          else {
+            Chart.addSeries(chart,analysis[i],'na',date)
+            Chart.addSeries(chart,analysis[i],'k',date)
+            Chart.addSeries(chart,analysis[i],'cl',date)
+          }
         } 
-        if(chart.series[i].data.length < analysis[i].counter+1 || currentId != id){
+        if(chart.series[i].data.length < analysis[i].counter+1  && id == 'all' || currentId != id && id == 'all') {
+          Chart.setSeries(chart,analysis[i],'na',i*3,date);
+          Chart.setSeries(chart,analysis[i],'k',i*3+1,date);
+          Chart.setSeries(chart,analysis[i],'cl',i*3+2,date);
+        } else if(chart.series[i].data.length < analysis[i].counter+1 || currentId != id){
           Chart.setSeries(chart,analysis[i],id,i,date);
         }
       }
