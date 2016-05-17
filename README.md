@@ -11,21 +11,26 @@
   To compile/run this meteor package copy this using:
   ```git clone https://github.com/SonnyX/UrineAnalyzer-RPI.git
   cd UrineAnalyzer-RPI
+  meteor npm install
   meteor```
   
 ## Architecture
   This repository is divided in three major folders and one declaration folder: client, server, lib and collections.
   
   [**client**][client]
+  
   Contains code related to the webpage.
   
   [**server**][server]
+  
   You'll find all the code that makes the contact between the server application and the MSP controller, as well as the code utilized to publish the database to the client and the code to permit database backups and restoration.
   
   [**lib**][lib]
+  
   You'll find most of the links between client and server application in the methods.js file and the Database's files inside the database folder
   
   [**collections**](./collections/collections.js)
+  
   Here you'll find the collections declaration that are utilized by both server and client side applications.
   
 [server]:./server
@@ -49,8 +54,6 @@ At the startup the scripts below will be called and the bundled version will aut
 
 # start.sh - needs to be located in the parent folder of where you want the app to be deployed.
 ```
-#!/bin/sh -e
-cat << "EOF"
 #!/bin/sh -e
 cat << "EOF"
 
