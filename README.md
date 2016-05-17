@@ -9,10 +9,12 @@
   
 ### Getting started
   To compile/run this meteor package copy this using:
-  ```git clone https://github.com/SonnyX/UrineAnalyzer-RPI.git
+  ```
+  git clone https://github.com/SonnyX/UrineAnalyzer-RPI.git
   cd UrineAnalyzer-RPI
   meteor npm install
-  meteor```
+  meteor
+  ```
   
 ## Architecture
   This repository is divided in three major folders and one declaration folder: client, server, lib and collections.
