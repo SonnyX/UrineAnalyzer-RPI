@@ -1,0 +1,28 @@
+{
+  "name": "urine-analyzer",
+  "version": "1.0.0",
+  "description": "The Raspberry Pi side of the Urine Analyzer software",
+  "main": "main.js",
+  "dependencies": {
+    "diskspace": "^1.0.2",
+    "mongodb-backup": "^1.4.3",
+    "mongodb-restore": "^1.4.2",
+    "path": "^0.12.7",
+    "serialport": "^3.0.1",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SonnyX/app.git"
+  },
+  "author": "Randy von der Weide",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SonnyX/app/issues"
+  },
+  "homepage": "https://github.com/SonnyX/app#readme"
+}

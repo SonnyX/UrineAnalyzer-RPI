@@ -35,3 +35,4 @@ rcy:nouislider
 meteorhacks:aggregate
 standard-minifier-css
 standard-minifier-js
+meteorhacks:fast-render

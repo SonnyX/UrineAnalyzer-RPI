@@ -53,7 +53,9 @@ meteor build --architecture os.linux.x86_32 ../build
 scp -P port ../build/app.tar.gz  username@IPaddress:/target/dest
 ssh username@IPaddress -p port
 ```
-login and then run the command: reboot
+login and if you want to see the update screen you can use: ```sh start.sh```
+once comnpleted you then run the command: ```reboot```
+Or if you are not interrested in the update screen then you can use: ```reboot```
 
 At the startup the scripts below will be called and the bundled version will automatically be installed.
 
@@ -84,8 +86,8 @@ if [ -f "$bundle" ]; then
   tar -xf $bundle
   echo '>>> Removing '$bundle
   rm -rf $bundle
-  echo '>>> Installing dependencies'
-  (cd bundle/programs/server && npm install && rm -fR npm/node_modules/meteor/npm-bcrypt/node_modules/bcrypt/ && npm install serialport underscore fs mongodb-backup mongodb-restore bcrypt)
+  echo '>>> Running NPM Install'
+  (cd bundle/programs/server && npm install --arch=arm && echo ">>> Installing dependencies" && rm -fR npm/node_modules/meteor/npm-bcrypt/node_modules/bcrypt/ && npm install serialport underscore fs mongodb-backup mongodb-restore bcrypt --arch=arm)
   echo '>>> Finished installing dependencies'
   echo '>>> Copying required files to bundle directory'
   cat  > bundle/index.js << "EOF"
@@ -106,7 +108,7 @@ EOF
   echo "xinit /usr/local/bin/xinput_calibrator --output-type xorg.conf.d --output-filename /usr/share/X11/xorg.conf.d/01-input.conf -- :1" > bundle/cal_ts.sh
   echo '>>> Finished update'
 fi
-
+echo '>>> Starting server'
 export MONGO_URL=mongodb://localhost:27017/test
 export ROOT_URL=http://localhost
 export PORT=80
@@ -118,7 +120,7 @@ node bundle/main.js &
 while !(netstat -lnt | awk '$6 == "LISTEN" && $4 ~ ".80"' | grep -q "80"); do
 sleep 1
 done
-
+echo '>>> Starting GUI'
 xinit /usr/local/lib/node_modules/electron-prebuilt/dist/electron /root/piruzao/bundle/index.js 2>/dev/null
 ```
 
@@ -137,6 +139,6 @@ xinit /usr/local/lib/node_modules/electron-prebuilt/dist/electron /root/piruzao/
 #
 # By default this script does nothing.
 
-/bin/sh /root/bash.sh >/dev/console 2>&1 | tee &
+(/bin/sh /root/start.sh 2>&1) | tee /root/log.txt /dev/console &
 exit 0
 ```
