@@ -1,9 +1,4 @@
 # Urine Analyzer
-  - [Server side][server]
-  - [Meteor Methods][lib]
-  - [Client side][client]
-  - [Database][database]
-
 ## Summary
   This is the **_Urine Analyzer_** project repository. 
   
@@ -12,33 +7,26 @@
   
   [**_Meteor docs_**](http://docs.meteor.com/#/basic/)
   
-## Goals
-  This repository is dedicated to the development of the **_Urine Analyzer_** project
-  
-  and has as it's main goal to serve as reference for the constant development of the project despite
-  the changes in the development team.
+### Getting started
+  To compile/run this meteor package copy this using:
+  ```git clone https://github.com/SonnyX/UrineAnalyzer-RPI.git
+  cd UrineAnalyzer-RPI
+  meteor```
   
 ## Architecture
-   This repository is divided in three major folders and one declaration folder: client, server, lib and collections.
+  This repository is divided in three major folders and one declaration folder: client, server, lib and collections.
   
   [**client**][client]
-  >
-    You'll find codes involving the design of the webpage itself.
+  Contains code related to the webpage.
   
   [**server**][server]
-  >
-    You'll find all the code that makes the contact between the server application and the MSP controller,
-    as well as the code utilized to publish the database to the client 
-    and the code to permit database backups and restoration.
+  You'll find all the code that makes the contact between the server application and the MSP controller, as well as the code utilized to publish the database to the client and the code to permit database backups and restoration.
   
   [**lib**][lib]
-  >
-    You'll find most of the links between client and server application in the methods.js file
-    and the Database's files inside the database folder
+  You'll find most of the links between client and server application in the methods.js file and the Database's files inside the database folder
   
   [**collections**](./collections/collections.js)
-  >
-    Here you'll find the collections declaration that are utilized by both server and client side applications.
+  Here you'll find the collections declaration that are utilized by both server and client side applications.
   
 [server]:./server
 [lib]:./lib
@@ -61,6 +49,8 @@ At the startup the scripts below will be called and the bundled version will aut
 
 # start.sh - needs to be located in the parent folder of where you want the app to be deployed.
 ```
+#!/bin/sh -e
+cat << "EOF"
 #!/bin/sh -e
 cat << "EOF"
 
@@ -87,7 +77,9 @@ if [ -f "$bundle" ]; then
   echo '>>> Removing '$bundle
   rm -rf $bundle
   echo '>>> Running NPM Install'
-  (cd bundle/programs/server && npm install --arch=arm && echo ">>> Installing dependencies" && rm -fR npm/node_modules/meteor/npm-bcrypt/node_modules/bcrypt/ && npm install serialport underscore fs mongodb-backup mongodb-restore bcrypt --arch=arm)
+  (cd bundle/programs/server && npm install)
+  echo '>>> reinstalling serialport & bcrypt'
+  (cd bundle/programs/server && rm -fR npm/node_modules/meteor/npm-bcrypt npm/node_modules/serialport && npm install bcrypt serialport)
   echo '>>> Finished installing dependencies'
   echo '>>> Copying required files to bundle directory'
   cat  > bundle/index.js << "EOF"
